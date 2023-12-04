@@ -1,0 +1,15 @@
+.bg-intro {
+  background: url("../../assets/images/intro5.jpg");
+  background-repeat: no-repeat;
+}
+.bg-teacher {
+  background: url("../../assets/images/giangvien-bg.jpg");
+  background-repeat: no-repeat;
+}
+.bg-register {
+  background: url("../../assets/images/intro2.jpg");
+  background-repeat: no-repeat;
+}
+:where(.css-dev-only-do-not-override-pr0fja).ant-form-item {
+  margin-bottom: 16px;
+}

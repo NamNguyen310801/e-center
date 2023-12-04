@@ -1,0 +1,257 @@
+/* AD-User */
+.admin-user .ant-table.ant-table-bordered {
+  background: #aac4ce !important;
+}
+.admin-user .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #18a8cc;
+}
+.admin-user .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #4d8dc2 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-user .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-user .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-user .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-user .ant-table-column-sort {
+  background: transparent;
+}
+.admin-user .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #cce1e7 !important;
+}
+/* AD-Teacher */
+.admin-teacher .ant-table.ant-table-bordered {
+  background: #a9bbc0 !important;
+}
+.admin-teacher .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #128caa;
+}
+.admin-teacher .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #344e64 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-teacher .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-teacher .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-teacher .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-teacher .ant-table-column-sort {
+  background: transparent;
+}
+.admin-teacher .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #849296 !important;
+}
+/* AD-Student */
+.admin-student .ant-table.ant-table-bordered {
+  background: #aac7cf !important;
+}
+.admin-student .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #128caa;
+}
+.admin-student .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #2e4b63 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-student .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-student .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-student .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-student .ant-table-column-sort {
+  background: transparent;
+}
+.admin-student .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #97b0b8 !important;
+}
+/* admin-student-detail */
+.admin-student-detail .ant-table.ant-table-bordered {
+  background: #bcc8cc !important;
+}
+.admin-student-detail .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #bcc8cc;
+}
+.admin-student-detail .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #88888a !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-student-detail .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-student-detail .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-student-detail .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-student-detail .ant-table-column-sort {
+  background: transparent;
+}
+.admin-student-detail .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #b2bec2 !important;
+}
+/* AD-Schedule */
+.admin-schedule .ant-table.ant-table-bordered {
+  background: #d8ccc5 !important;
+}
+.admin-schedule .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #128caa;
+}
+.admin-schedule .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #643f34 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-schedule .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-schedule .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-schedule .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-schedule .ant-table-column-sort {
+  background: transparent;
+}
+.admin-schedule .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #968984 !important;
+}
+
+/* AD-Class*/
+.admin-class .ant-table.ant-table-bordered {
+  background: #bac0a9 !important;
+}
+.admin-class .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #128caa;
+}
+.admin-class .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #525a3d !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-class .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-class .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-class .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-class .ant-table-column-sort {
+  background: transparent;
+}
+.admin-class .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #8e9684 !important;
+}
+/* AD-Salary */
+.admin-salary .ant-table.ant-table-bordered {
+  background: #c0c0a9 !important;
+}
+.admin-salary .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #128caa;
+}
+.admin-salary .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #55522d !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-salary .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-salary .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-salary .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-salary .ant-table-column-sort {
+  background: transparent;
+}
+.admin-salary .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #949684 !important;
+}
+/* AD-Tuition */
+.admin-tuition .ant-table.ant-table-bordered {
+  background: rgb(212, 191, 199) !important;
+}
+.admin-tuition .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #128caa;
+}
+.admin-tuition .ant-table-wrapper .ant-table-thead > tr > th {
+  background: rgb(45, 37, 53) !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-tuition .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-tuition .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-tuition .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-tuition .ant-table-column-sort {
+  background: transparent;
+}
+.admin-tuition .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #b9a1ae !important;
+}

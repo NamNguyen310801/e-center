@@ -1,0 +1,100 @@
+/* Student */
+
+.teacher-student .ant-table.ant-table-bordered {
+  background: #bac4da !important;
+  border: none;
+}
+.teacher-student .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #8418cc;
+}
+.teacher-student .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #495766 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+.teacher-student .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.teacher-student .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.teacher-student .ant-table-tbody > tr > td {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.teacher-student .ant-table-column-sort {
+  background: transparent;
+}
+.teacher-student .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #b1c4eb !important;
+}
+/* Schedule */
+.teacher-schedule .ant-table.ant-table-bordered {
+  background: #f8cccc !important;
+  border: none;
+}
+.teacher-schedule .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #1851cc;
+}
+.teacher-schedule .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #cc0a0a !important;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+.teacher-schedule .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.teacher-schedule .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.teacher-schedule .ant-table-tbody > tr > td {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.teacher-schedule .ant-table-column-sort {
+  background: transparent;
+}
+.teacher-schedule .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #c9b2af !important;
+}
+/* Salary */
+.teacher-salary .ant-table.ant-table-bordered {
+  background: #c3d9df !important;
+  border: none;
+}
+.teacher-salary .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #1893cc;
+}
+.teacher-salary .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #3c4e55 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+.teacher-salary .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.teacher-salary .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.teacher-salary .ant-table-tbody > tr > td {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.teacher-salary .ant-table-column-sort {
+  background: transparent;
+}
+.teacher-salary .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #afc2c9 !important;
+}

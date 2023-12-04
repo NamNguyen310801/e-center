@@ -1,0 +1,69 @@
+.user .ant-switch {
+  background-color: #18ccba;
+}
+.user .ant-switch.ant-switch-checked {
+  background-color: #18ccba;
+}
+.user-schedule .ant-table.ant-table-bordered {
+  background: #aacebf !important;
+  border: none;
+}
+.user-schedule .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #18ccba;
+}
+.user-schedule .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #3b9643 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+.user-schedule .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.user-schedule .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.user-schedule .ant-table-tbody > tr > td {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.user-schedule .ant-table-column-sort {
+  background: transparent;
+}
+.user-schedule .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #6ebd9b !important;
+}
+.user-tuition .ant-table.ant-table-bordered {
+  background: #d9e8f7 !important;
+}
+.user-tuition .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #597cc7;
+}
+.user-tuition .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #56a4fe !important;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+.user-tuition .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.user-tuition .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.user-tuition .ant-table-tbody > tr > td {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: #3f3a3a;
+}
+.user-tuition .ant-table-column-sort {
+  background: transparent;
+}
+.user-tuition .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #8cb2dd !important;
+}

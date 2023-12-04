@@ -1,0 +1,116 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{html,js,jsx,ts,tsx}",
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
+  ],
+  important: "#root",
+  theme: {
+    extend: {
+      backgroundImage: {
+        preView: "linear-gradient(180deg,#1e1e1c00,#1e1e1ce6)",
+      },
+      boxShadow: {
+        before: "0px -10px 0 0 rgb(243,244,246)",
+        card: "0px 2px 1.5px 0px rgb(204 204 204)",
+        newShadow: "3.5px 6px 18px 0 rgb(0 0 0 /10%)",
+        tabShadow: "6px 0px 20px 0 #0000008c",
+        headerShadow: "1px 0px 20px #0000001f",
+        stuck: "1px 1px 10px rgba(0,0,0,0.15)",
+      },
+      backgroundPosition: {
+        no: "0 0",
+      },
+      width: {
+        150: "150px",
+        190: "190px",
+        225: "225px",
+        275: "275px",
+        300: "300px",
+        340: "340px",
+        350: "350px",
+        375: "375px",
+        460: "460px",
+        508: "508px",
+        656: "656px",
+        880: "880px",
+      },
+      height: {
+        80: "80px",
+        150: "150px",
+        225: "225px",
+        300: "300px",
+        340: "340px",
+        370: "370px",
+        420: "420px",
+        510: "510px",
+        600: "600px",
+        650: "650px",
+        685: "685px",
+        800: "800px",
+        "90vh": "90vh",
+      },
+      fontWeight: {
+        thin: "100",
+        extralight: "200",
+        light: "300",
+        normal: "400",
+        medium: "500",
+        semibold: "600",
+        bold: "700",
+        extrabold: "800",
+        black: "900",
+      },
+      minWidth: {
+        210: "210px",
+        350: "350px",
+        620: "620px",
+      },
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1536px",
+      },
+      colors: {
+        footerColor: "rgba(51, 51, 51, 0.86)",
+        headingColor: "#2e2e2e",
+        textColor: "#515151",
+        cartNumBg: "#e80013",
+        primary: "#f5f3f3",
+        cardOverlay: "rgba(256,256,256,0.4)",
+        lightOverlay: "rgba(255,255,255,0.4)",
+        lightTextGray: "rgba(156,160,171,0.33)",
+        card: "rgba(256,256,256,0.8)",
+        cartBg: "#282a2c",
+        cartItem: "#2e3033",
+        cartTotal: "#343739",
+      },
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-13deg)" },
+          "50%": { transform: "rotate(13deg)" },
+        },
+        miniScale: {
+          "0%, 100%": { transform: "scale(1.2)" },
+          "50%": { transform: "scale(0.8)" },
+        },
+        hidden: {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 2s ease-in-out infinite",
+        miniScale: "miniScale 2s ease-in-out infinite",
+        hidden: "hidden 0.2s ease-in ",
+      },
+    },
+  },
+  plugins: [require("tailwind-scrollbar")],
+};
