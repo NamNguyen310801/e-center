@@ -20,6 +20,7 @@
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
     "debounce": "^1.2.1",
+    "dotenv": "^16.3.1",
     "exceljs": "^4.3.0",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.5.0",
@@ -74,7 +75,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000",
+  "proxy": "https://e-center-backend.onrender.com",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "tailwind-scrollbar": "^3.0.4"

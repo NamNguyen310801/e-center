@@ -8,6 +8,8 @@ import { updateUser } from "../../../../redux/slice/auth.slice";
 import Toast from "../../../../utils/Toast";
 import { updateUserAPI } from "../../../../services/user.api";
 import { Avatar } from "../../../../assets";
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
 
 export default function Personal() {
   const dispatch = useDispatch();
@@ -38,7 +40,9 @@ export default function Personal() {
     const res = await updateUserAPI(id, data, user.access_token);
     if (res.status === "OK") {
       dispatch(updateUser({ ...data }));
-      dispatch(updateUserList({ _id: id, ...data }));
+      dispatch(
+        updateUserList({ _id: id, ...data, date: data?.date?.format() })
+      );
       Toast("success", res.message);
     } else {
       Toast("error", res.message);
@@ -279,20 +283,20 @@ export default function Personal() {
                 <h3 className="text-base m-0 font-semibold">Ngày sinh</h3>
                 <div>
                   <div className="mt-4 max-w-[500px] ">
-                    <input
+                    <DatePicker
+                      format={"DD/MM/YYYY"}
+                      placeholder="Nhập ngày sinh"
                       type="text"
                       name="date"
                       className="w-full bg-white border-none border-b border-black/5 text-black/80 text-sm mb-[10px] outline-none pb-2"
-                      maxLength={50}
                       onChange={(e) =>
                         setData((prev) => ({
                           ...prev,
                           date: e.target.value,
                         }))
                       }
-                      placeholder="Thêm ngày sinh"
                       disabled={showDate}
-                      value={user?.date}
+                      value={user?.date ? dayjs(user?.date) : null}
                     />
                   </div>
                 </div>

@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+ <!-- "proxy": "http://localhost:4000", -->
+
+<!-- # REACT_APP_API_URL = http://localhost:3000/api -->
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
