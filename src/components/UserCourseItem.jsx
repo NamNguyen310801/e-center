@@ -5,6 +5,7 @@ import { Progress } from "antd";
 import { useSelector } from "react-redux";
 
 export default function UserCourseItem({ item = "" }) {
+  console.log(item);
   const courseList = useSelector((state) => state.course.courseList);
   const [data, setData] = useState("");
   useEffect(() => {

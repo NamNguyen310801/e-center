@@ -326,7 +326,7 @@ export default function AdminSchedule() {
           </h1>
         </div>
         <div className="flex gap-x-6 w-full">
-          <div className="flex gap-8 bg-lightOverlay transition duration-700 min-w-[320px] max-h-[400px]">
+          <div className="flex gap-8 bg-lightOverlay transition duration-700 min-w-[80px] max-h-[400px] relative">
             <Tooltip title="Thêm lịch giảng dạy" placement="right">
               <button
                 className={`${
@@ -339,7 +339,7 @@ export default function AdminSchedule() {
             <div
               className={`${
                 isOpen ? " " : "hidden"
-              } flex gap-8 mx-auto transition duration-700 min-w-[320px]`}>
+              } flex gap-8 mx-auto transition duration-700 min-w-[320px] absolute top-0 left-0 bg-white z-[2]`}>
               <div className="border border-gray-300 rounded-md p-4 w-full flex flex-col items-center justify-start gap-4 max-h-[400px]">
                 <h3 className="px-4 py-[10px] text-xl text-blue-500 font-semibold">
                   Thêm lịch giảng dạy

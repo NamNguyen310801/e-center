@@ -38,7 +38,7 @@ import {
   updateStudentList,
 } from "../../../../redux/slice/student.slice";
 import dayjs from "dayjs";
-import { getBase64 } from "../../../../utils/function";
+import { getBase64, isDateBeforeToday } from "../../../../utils/function";
 import { getRegexPhoneNumber } from "../../../../utils/stringsUtils";
 import {
   deletedUserSlice,
@@ -47,6 +47,7 @@ import {
 } from "../../../../redux/slice/user.slice";
 import { setShowStudent } from "../../../../redux/slice/show.slice";
 import AdminStudentDetail from "./AdminStudentDetail";
+import { sendTuitionAPI } from "../../../../services/email.api";
 
 const { confirm } = Modal;
 
@@ -58,6 +59,7 @@ export default function AdminStudent() {
   const studentList = useSelector((state) => state.student.studentList);
   const tuitionList = useSelector((state) => state.tuition.tuitionList);
   const classList = useSelector((state) => state.classSlice.classList);
+  const [emailSend, setEmailSend] = useState("");
 
   const dataTable =
     studentList?.length > 0 &&
@@ -154,6 +156,7 @@ export default function AdminStudent() {
     if (res.status === "OK") {
       Toast("success", res.message);
       dispatch(addStudentTuitionList({ id, data: res?.data?.tuitionList }));
+      await sendTuitionAPI({ email: emailSend });
       onCancelAdd();
     } else {
       Toast("error", res.message);
@@ -259,6 +262,7 @@ export default function AdminStudent() {
   const openAdd = (value) => {
     findTuitionFee(value?.tuition);
     setIdEdit(value?._id);
+    setEmailSend(value?.email);
     setTimeout(() => {
       setIsOpenAdd(true);
     }, 100);
@@ -268,6 +272,7 @@ export default function AdminStudent() {
     form.resetFields();
     setFormValue(defaultValue);
     setIsOpenEdit(false);
+    setEmailSend("");
   };
   const onCancelAdd = () => {
     setIdEdit("");
@@ -688,7 +693,15 @@ export default function AdminStudent() {
             </Select>
           </Form.Item>
 
-          <Form.Item label="Ngày sinh" name="date">
+          <Form.Item
+            label="Ngày sinh"
+            name="date"
+            rules={[
+              {
+                pattern: isDateBeforeToday(form?.getFieldsValue),
+                message: "Ngày sinh phải cách hiện tại ít nhất 5 năm",
+              },
+            ]}>
             <DatePicker format={"DD/MM/YYYY"} placeholder="Nhập ngày sinh" />
           </Form.Item>
           <Form.Item

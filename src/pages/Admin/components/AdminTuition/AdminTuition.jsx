@@ -191,7 +191,7 @@ export default function AdminTuition() {
           <h1 className="font-black text-xl text-[#242424]">Quản lý Học phí</h1>
         </div>
         <div className="flex gap-x-6 w-full">
-          <div className="flex gap-8 bg-lightOverlay transition duration-700 min-w-[320px]">
+          <div className="flex gap-8 bg-lightOverlay transition duration-700 min-w-[80px] relative">
             <Tooltip title="Thêm loại Tiền lương" placement="right">
               <button
                 className={`${
@@ -204,7 +204,7 @@ export default function AdminTuition() {
             <div
               className={`${
                 isOpen ? " " : "hidden"
-              } flex gap-8 mx-auto transition duration-700 min-w-[320px]`}>
+              } flex gap-8 mx-auto transition duration-700 min-w-[320px] absolute top-0 left-0 bg-white z-[2]`}>
               <div className="border border-gray-300 rounded-md p-4 w-full flex flex-col items-center justify-start gap-4 h-[280px]">
                 <h3 className="px-4 py-[10px] text-xl text-blue-500 font-semibold">
                   Thêm loại học phí

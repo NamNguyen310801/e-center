@@ -15,10 +15,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAPI } from "../../../services/user.api";
 import Toast from "../../../utils/Toast";
 import { resetUser } from "../../../redux/slice/auth.slice";
+import { setTextSearch } from "../../../redux/slice/user.slice";
 export default function UserHeader() {
   const [isMenu, setIsMenu] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const studentList = useSelector((state) => state.student.studentList);
+  const textSearch = useSelector((state) => state.user.textSearch);
   const student = studentList?.find((student) => student?._id === user?.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,6 +28,9 @@ export default function UserHeader() {
   const handleLogout = async () => {
     await logoutAPI();
     Toast("success", "Đăng xuất thành công");
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
     dispatch(resetUser());
   };
   return (
@@ -57,7 +62,9 @@ export default function UserHeader() {
           <input
             className="outline-none h-full flex-1 px-1 text-gray-300 md:text-[#444] ml-7 border-l border-gray-300 w-full hidden md:inline"
             spellCheck="false"
-            placeholder="Tìm kiếm khóa học, bài viết, video, ..."
+            value={textSearch}
+            onChange={(e) => dispatch(setTextSearch(e.target.value))}
+            placeholder="Tìm kiếm khóa học,..."
           />
         </div>
       </div>

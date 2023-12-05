@@ -1,5 +1,3 @@
-import React from "react";
-import { FaShieldAlt } from "react-icons/fa";
 import { FaBell, FaUser } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 

@@ -26,7 +26,7 @@ import {
   ExportToExcel,
 } from "../../../../components";
 import { useDispatch, useSelector } from "react-redux";
-import { getBase64 } from "../../../../utils/function";
+import { getBase64, isDateBeforeToday } from "../../../../utils/function";
 import Toast from "../../../../utils/Toast";
 import * as UserService from "../../../../services/user.api";
 import {
@@ -440,7 +440,7 @@ export default function AdminUser() {
         onClick={handleGetAllUser}
       />
       <div className="flex gap-x-6 w-full">
-        <div className="flex gap-8 bg-lightOverlay transition duration-700 min-w-[320px]">
+        <div className="flex gap-8 bg-lightOverlay transition duration-700 min-w-[60px] relative">
           <Tooltip title="Thêm Người dùng" placement="right">
             <button
               className={`${
@@ -453,7 +453,7 @@ export default function AdminUser() {
           <div
             className={`${
               isOpenAdd ? " " : "hidden"
-            } flex gap-8 mx-auto transition max-h-[680px] duration-700 min-w-[320px] bg-white`}>
+            } absolute top-0 left-0 z-[2] flex gap-8 mx-auto transition max-h-[680px] duration-700 min-w-[360px] bg-white `}>
             <div className="border relative border-gray-300 rounded-md p-4 w-full flex flex-col items-center justify-start gap-4 h-auto">
               <h3 className="px-4 py-[10px] text-xl text-blue-500 font-semibold">
                 Thêm Người dùng
@@ -596,7 +596,15 @@ export default function AdminUser() {
                       ]}>
                       <Input placeholder="Nhập địa chỉ" />
                     </Form.Item>
-                    <Form.Item label="Ngày sinh" name="date">
+                    <Form.Item
+                      label="Ngày sinh"
+                      name="date"
+                      rules={[
+                        {
+                          pattern: isDateBeforeToday(form?.getFieldsValue),
+                          message: "Ngày sinh phải cách hiện tại ít nhất 5 năm",
+                        },
+                      ]}>
                       <DatePicker
                         format={"DD/MM/YYYY"}
                         placeholder="Nhập ngày sinh"
@@ -769,7 +777,15 @@ export default function AdminUser() {
                 ]}>
                 <Input placeholder="Nhập địa chỉ" />
               </Form.Item>
-              <Form.Item label="Ngày sinh" name="date">
+              <Form.Item
+                label="Ngày sinh"
+                name="date"
+                rules={[
+                  {
+                    pattern: isDateBeforeToday(formEdit?.getFieldsValue),
+                    message: "Ngày sinh phải cách hiện tại ít nhất 5 năm",
+                  },
+                ]}>
                 <DatePicker
                   format={"DD/MM/YYYY"}
                   placeholder="Nhập ngày sinh"

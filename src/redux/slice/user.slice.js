@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  user: null,
   userList: null,
+  textSearch: "",
 };
 const userSlice = createSlice({
   name: "user",
@@ -30,9 +30,17 @@ const userSlice = createSlice({
         state.userList?.splice(userDel, 1);
       }
     },
+    setTextSearch: (state, action) => {
+      state.textSearch = action.payload;
+    },
   },
 });
 
-export const { setUserList, addToUserList, updateUserList, deletedUserSlice } =
-  userSlice.actions;
+export const {
+  setUserList,
+  addToUserList,
+  updateUserList,
+  deletedUserSlice,
+  setTextSearch,
+} = userSlice.actions;
 export default userSlice.reducer;

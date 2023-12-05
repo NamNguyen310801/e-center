@@ -5,7 +5,6 @@ import {
   Button,
   FloatButton,
   Spin,
-  Modal,
   Table,
   Avatar,
   Space,
@@ -50,7 +49,6 @@ export default function TeacherStudent() {
           address: student?.address,
         };
       });
-
   // *****API
   useEffect(() => {
     if (!studentList) {
@@ -66,34 +64,6 @@ export default function TeacherStudent() {
     setIsLoading(false);
   };
 
-  //-----Edit
-
-  //=========== State
-  const defaultValue = {
-    email: "",
-    name: "",
-    phone: "",
-    address: "",
-    date: "",
-    avatar: "",
-    gender: "",
-    tuition: "",
-    klass: "",
-    course: [],
-  };
-  const [isOpenEdit, setIsOpenEdit] = useState(false);
-  const [formValue, setFormValue] = useState(defaultValue);
-  const [idEdit, setIdEdit] = useState("");
-  //================Form
-
-  // Cap nhat gia tri form
-
-  const onCancel = () => {
-    setIdEdit("");
-    setFormValue(defaultValue);
-    setIsOpenEdit(false);
-  };
-  const onOkEdit = () => {};
   //=========== Column table
   //func search
   const searchInput = useRef(null);
@@ -290,12 +260,6 @@ export default function TeacherStudent() {
           bordered
         />
       </Spin>
-      <Modal
-        forceRender
-        open={isOpenEdit}
-        title="Cập nhật Học viên"
-        onCancel={() => onCancel()}
-        onOk={() => onOkEdit()}></Modal>
     </main>
   );
 }

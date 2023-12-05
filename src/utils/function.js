@@ -106,8 +106,10 @@ export const isDateBeforeToday = (date) => {
   const inputDateTime = new Date(date);
   // Lấy ngày hiện tại
   const currentDate = new Date();
+  const fiveYearsAgo = new Date();
+  fiveYearsAgo.setFullYear(currentDate.getFullYear() - 5);
   // So sánh ngày
-  return inputDateTime < currentDate;
+  return inputDateTime < fiveYearsAgo;
 };
 
 const s2ab = (s) => {

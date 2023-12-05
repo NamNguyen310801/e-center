@@ -2,7 +2,7 @@ import React, { useState, Fragment } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 import { Logo } from "../../../assets";
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaSearch } from "react-icons/fa";
+import { FaHome } from "react-icons/fa";
 import { Popover, Transition } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { HiOutlineBell, HiOutlineLogout } from "react-icons/hi";
@@ -47,66 +47,8 @@ export default function TeacherHeader() {
           </Link>
         </Tooltip>
       </div>
-      <div className="flex items-center justify-center ml-auto lg:ml-0">
-        <div
-          className="flex items-center justify-center md:border-2 md:border-[#e8e8e8] rounded-[20px] h-10 py-0 px-2 md:pr-4 transition duration-200 ease-in-out md:w-[420px] relative"
-          aria-expanded="false">
-          <FaSearch className="text-gray-300 md:text-gray-500 text-[20px] font-normal md:absolute left-3 bottom-[6px]" />
-          <input
-            className="outline-none h-full flex-1 px-1 text-gray-300 md:text-[#444] ml-7 border-l border-gray-300 w-full hidden md:inline"
-            spellCheck="false"
-            placeholder="Tìm kiếm khóa học, bài viết, video, ..."
-          />
-        </div>
-      </div>
-      <div className="flex items-center justify-end lg:min-w-[200px] lg:ml-8 px-2 gap-x-1 lg:gap-x-4">
-        {/* <Popover className="relative hidden md:block">
-          {({ open }) => (
-            <>
-              <Popover.Button
-                className={classNames(
-                  open && "bg-gray-100",
-                  "group inline-flex items-center rounded-sm p-1.5 text-gray-300 md:text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
-                )}>
-                <Tooltip title={"Khóa học của tôi"}>
-                  <BiBookReader className="text-[28px]" />
-                </Tooltip>
-              </Popover.Button>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-200"
-                enterFrom="opacity-0 translate-y-1"
-                enterTo="opacity-100 translate-y-0"
-                leave="transition ease-in duration-150"
-                leaveFrom="opacity-100 translate-y-0"
-                leaveTo="opacity-0 translate-y-1">
-                <Popover.Panel className="absolute right-[-110px] lg:right-0 z-10 mt-2.5 lg:transform w-350  overflow-hidden rounded-lg">
-                  <div className="bg-white shadow-md ring-1 ring-black ring-opacity-5 px-3 py-4 rounded-lg overflow-hidden transition-all duration-300 ease-in-out">
-                    <div className="flex items-center mb-2">
-                      <strong className="text-gray-700 font-medium my-0 mx-2">
-                        Khóa học của tôi
-                      </strong>
-                      <Link
-                        className="ml-auto text-sm p-2 text-[#343a8a]"
-                        to={"/user/my-courses"}>
-                        Xem tất cả
-                      </Link>
-                    </div>
 
-                    <div className="flex flex-col py-2 gap-y-2 w-full max-h-[250px] overflow-y-auto overscroll-contain">
-                      <div className="text-base flex items-center justify-center py-3 h-16 text-gray-800">
-                        Bạn chưa học khóa học nào!
-                      </div>
-                      <MyCoursesItem />
-                      <MyCoursesItem />
-                      <MyCoursesItem />
-                    </div>
-                  </div>
-                </Popover.Panel>
-              </Transition>
-            </>
-          )}
-        </Popover> */}
+      <div className="flex items-center justify-end lg:min-w-[200px] lg:ml-8 px-2 gap-x-1 lg:gap-x-4">
         <Popover className="relative">
           {({ open }) => (
             <>

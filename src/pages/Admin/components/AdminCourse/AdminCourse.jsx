@@ -432,7 +432,7 @@ export default function AdminCourse() {
           </h1>
         </div>
         <div className="flex gap-x-6 w-full">
-          <div className="flex gap-8 bg-lightOverlay transition duration-700 lg:min-w-[320px]  max-h-[600px]">
+          <div className="flex gap-8 bg-lightOverlay transition duration-700 lg:min-w-[60px] max-h-[600px] relative">
             <Tooltip title="Thêm Khóa học" placement="right">
               <button
                 className={`${
@@ -445,7 +445,7 @@ export default function AdminCourse() {
             <div
               className={`${
                 isOpen ? " " : "hidden"
-              } flex gap-8 mx-auto transition duration-700 lg:min-w-[320px]`}>
+              } flex gap-8 mx-auto transition duration-700 lg:min-w-[320px] absolute top-0 left-0 z-[2] bg-white`}>
               <div className="border border-gray-300 rounded-md p-4 w-full flex flex-col items-center justify-start gap-4">
                 <h3 className="px-4 py-[10px] text-xl text-blue-500 font-semibold">
                   Thêm Khóa học

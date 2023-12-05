@@ -6,6 +6,7 @@ export default function UserCourse() {
   const user = useSelector((state) => state.auth.user);
   const studentList = useSelector((state) => state.student.studentList);
   const student = studentList?.find((student) => student?._id === user?.id);
+  const textSearch = useSelector((state) => state.user.textSearch);
   return (
     <main className="relative container mx-auto p-0 my-0">
       <div className="pt-0 px-4 md:pt-2 lg:px-0 flex flex-col flex-1 w-full">

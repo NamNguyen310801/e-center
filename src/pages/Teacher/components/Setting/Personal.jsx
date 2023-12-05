@@ -7,6 +7,9 @@ import { updateUserList } from "../../../../redux/slice/user.slice";
 import { updateUser } from "../../../../redux/slice/auth.slice";
 import Toast from "../../../../utils/Toast";
 import { getRegexPhoneNumber } from "../../../../utils/stringsUtils";
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
+import { isDateBeforeToday } from "../../../../utils/function";
 
 export default function Personal() {
   const dispatch = useDispatch();
@@ -20,9 +23,11 @@ export default function Personal() {
   const [showPhone, setShowPhone] = useState(true);
   const [showGender, setShowGender] = useState(true);
   const [showIntro, setShowIntro] = useState(true);
-  const [showBio, setShowBio] = useState(true);
-
-  const [error, setError] = useState("");
+  // const [showBio, setShowBio] = useState(true);
+  const [error, setError] = useState({
+    errDate: false,
+    errPhone: false,
+  });
   const fileInputRef = useRef(null);
   const handleCameraClick = () => {
     if (fileInputRef.current) {
@@ -78,7 +83,7 @@ export default function Personal() {
                         setData((prev) => ({ ...prev, name: e.target.value }))
                       }
                       maxLength={50}
-                      value={data?.name}
+                      value={data?.name || ""}
                       disabled={showName}
                       placeholder="Thêm tên của bạn"
                     />
@@ -138,7 +143,7 @@ export default function Personal() {
                       }
                       placeholder="Thêm địa chỉ"
                       disabled={showAddress}
-                      value={data?.address}
+                      value={data?.address || ""}
                     />
                     <div className="text-[#757575] text-sm/5">
                       <p>Địa chỉ của bạn.</p>
@@ -210,6 +215,7 @@ export default function Personal() {
                             accept="image/jpg, image/jpeg, image/png"
                             id="avatar"
                             ref={fileInputRef}
+                            value={data?.avatar || ""}
                             onChange={(e) => handleFileChange(e)}
                           />
                         </div>
@@ -260,9 +266,8 @@ export default function Personal() {
                       name="email"
                       className="w-full bg-white border-none border-b border-black/5 text-black/80 text-sm mb-[10px] outline-none pb-2"
                       maxLength={50}
-                      placeholder="Eg. hoclaptrinh@f8.edu.vn"
                       disabled
-                      value={data?.email}
+                      value={data?.email || ""}
                     />
                     <div className="text-[#757575] text-sm/5">
                       <p>Email đã liên kết với Wonderland.</p>
@@ -277,21 +282,31 @@ export default function Personal() {
                 <h3 className="text-base m-0 font-semibold">Ngày sinh</h3>
                 <div>
                   <div className="mt-4 max-w-[500px] ">
-                    <input
+                    <DatePicker
+                      format={"DD/MM/YYYY"}
+                      placeholder="Nhập ngày sinh"
                       type="text"
                       name="date"
                       className="w-full bg-white border-none border-b border-black/5 text-black/80 text-sm mb-[10px] outline-none pb-2"
-                      maxLength={50}
-                      onChange={(e) =>
+                      onChange={(value) => {
                         setData((prev) => ({
                           ...prev,
-                          date: e.target.value,
-                        }))
-                      }
-                      placeholder="Thêm ngày sinh"
+                          date: value ? value.format() : "",
+                        }));
+                        if (!isDateBeforeToday(value)) {
+                          setError((pre) => ({ ...pre, errDate: true }));
+                        } else {
+                          setError((pre) => ({ ...pre, errDate: false }));
+                        }
+                      }}
                       disabled={showDate}
-                      value={user?.date}
+                      value={data?.date ? dayjs(data?.date) : null}
                     />
+                    {error?.errDate && (
+                      <p style={{ color: "red" }}>
+                        Ngày sinh phải cách hiện tại ít nhất 5 năm
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -309,7 +324,8 @@ export default function Personal() {
                       onClick={() => {
                         setShowDate(true);
                         editUser(data?.id, data);
-                      }}>
+                      }}
+                      disabled={error?.errDate || error?.errPhone}>
                       Lưu
                     </button>
                     <button
@@ -320,6 +336,7 @@ export default function Personal() {
                           ...prev,
                           date: user?.date,
                         }));
+                        setError((pre) => ({ ...pre, errDate: false }));
                       }}>
                       Hủy
                     </button>
@@ -339,20 +356,22 @@ export default function Personal() {
                       maxLength={10}
                       placeholder="Thêm số điện thoại"
                       disabled={showPhone}
-                      value={data?.phone}
+                      value={data?.phone || ""}
                       onChange={(e) => {
                         setData((prev) => ({
                           ...prev,
                           phone: e.target.value,
                         }));
                         if (!regexPhoneNumber.test(e.target.value)) {
-                          setError("Số điện thoại không hợp lệ");
+                          setError((pre) => ({ ...pre, errPhone: true }));
                         } else {
-                          setError("");
+                          setError((pre) => ({ ...pre, errPhone: false }));
                         }
                       }}
                     />
-                    {error && <p style={{ color: "red" }}>{error}</p>}
+                    {error?.errPhone && (
+                      <p style={{ color: "red" }}>Số điện thoại không hợp lệ</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -370,7 +389,8 @@ export default function Personal() {
                       onClick={() => {
                         setShowPhone(true);
                         editUser(data?.id, data);
-                      }}>
+                      }}
+                      disabled={error?.errDate || error?.errPhone}>
                       Lưu
                     </button>
                     <button
@@ -381,6 +401,7 @@ export default function Personal() {
                           ...prev,
                           phone: user?.phone,
                         }));
+                        setError((pre) => ({ ...pre, errPhone: false }));
                       }}>
                       Hủy
                     </button>
@@ -483,7 +504,7 @@ export default function Personal() {
                   <div className="mt-4 max-w-[500px] ">
                     <input
                       type="text"
-                      name="bio"
+                      name="intro"
                       className="w-full bg-white border-none border-b border-black/5 text-black/80 text-sm mb-[10px] outline-none pb-2 "
                       maxLength={150}
                       placeholder="Thêm giới thiệu"
