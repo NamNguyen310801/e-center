@@ -20,11 +20,8 @@ export default function MainStudent() {
       [array[i], array[j]] = [array[j], array[i]];
     }
   }
-
   videoList && shuffleArray(videoListStudentCopy);
   videoList && shuffleArray(videoListTeacherCopy);
-
-  // Lấy 4 giáo viên đầu tiên từ danh sách đã xáo trộn.
   const randomStudent = videoList && videoListStudentCopy.slice(0, 3);
   const randomTeacher = videoList && videoListTeacherCopy.slice(0, 3);
   return (

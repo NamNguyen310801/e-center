@@ -15,6 +15,7 @@ import {
   addStudentCourseList,
   updateStudentCourseList,
 } from "../../redux/slice/student.slice";
+import { Rate } from "antd";
 function CourseDetail() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -81,8 +82,22 @@ function CourseDetail() {
     <main className="relative w-full">
       <section className="container mx-auto px-2 flex flex-col lg:flex-row">
         <section className="lg:basis-2/3 w-full px-4 lg:max-w-[66.666667%] basis-full flex flex-col gap-y-3">
-          <h1 className="font-bold mt-4 min-h-[33px] text-[32px] w-full text-left ">
-            {data?.name}
+          <h1 className="font-bold mt-4 min-h-[33px] text-[32px] w-full flex justify-between">
+            <span className="text-left"> {data?.name}</span>
+            <div className="flex items-center ml-auto">
+              <div className="flex items-center">
+                <Rate
+                  value={!Boolean(data?.rating) ? 3 : data?.rating}
+                  disabled
+                />
+              </div>
+              <p className="ml-3 text-sm font-medium text-gray-700">
+                {!Boolean(data?.rating) ? 3 : data?.rating}/5
+              </p>
+              <p className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                117 đánh giá
+              </p>
+            </div>
           </h1>
           <div className="text-black/80 text-sm w-full">
             {data?.description}

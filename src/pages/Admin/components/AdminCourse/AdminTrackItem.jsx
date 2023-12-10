@@ -327,7 +327,7 @@ export default function AdminTrackItem({ item }) {
               {lessonList?.map((lesson) => (
                 <Select.Option
                   key={lesson._id}
-                  value={lesson?.id}
+                  value={lesson?._id}
                   label={lesson?.name}>
                   {lesson?.name}
                 </Select.Option>

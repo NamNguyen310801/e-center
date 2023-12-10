@@ -31,87 +31,77 @@ const items = [
     <HomeOutlined className="md:text-xl font-semibold text-gray-800" />
   ),
   getItem(
-    "Người dùng",
-    "user",
-    <UserOutlined className="md:text-xl font-semibold text-gray-800" />,
-    [
-      getItem(
-        "Danh sách người dùng",
-        "admin-user",
-        <TeamOutlined className="md:text-lg font-semibold text-gray-800" />
-      ),
-      // getItem(
-      //   "Thêm người dùng",
-      //   "admin-addUser",
-      //   <UserAddOutlined className="md:text-lg font-semibold text-gray-800" />
-      // ),
-      getItem(
-        "Thống kê",
-        "admin-statsUser",
-        <HiOutlineUserGroup className="md:text-lg font-semibold text-gray-800" />
-      ),
-    ]
+    "Quản lý người dùng",
+    "admin-user",
+    <UserOutlined className="md:text-xl font-semibold text-gray-800" />
+    // [
+    //   getItem(
+    //     "Danh sách người dùng",
+    //     "admin-user",
+    //     <TeamOutlined className="md:text-lg font-semibold text-gray-800" />
+    //   ),
+    //   // getItem(
+    //   //   "Thêm người dùng",
+    //   //   "admin-addUser",
+    //   //   <UserAddOutlined className="md:text-lg font-semibold text-gray-800" />
+    //   // ),
+    //   getItem(
+    //     "Thống kê",
+    //     "admin-statsUser",
+    //     <HiOutlineUserGroup className="md:text-lg font-semibold text-gray-800" />
+    //   ),
+    // ]
   ),
   getItem(
     "Quản lý giáo viên",
-    "teacherAdmin",
-    <FaUserTie className="md:text-xl font-semibold text-gray-800" />,
-    [
-      getItem(
-        "Danh sách giáo viên",
-        "admin-teacher",
-        <TeamOutlined className="md:text-xl font-semibold text-gray-800" />
-      ),
-      // getItem(
-      //   "Thêm giáo viên",
-      //   "admin-addTeacher",
-      //   <UserAddOutlined className="md:text-xl font-semibold text-gray-800" />
-      // ),
-      getItem(
-        "Thống kê",
-        "admin-statsTeacher",
-        <HiViewList className="md:text-xl font-semibold text-gray-800" />
-      ),
-    ]
+    "admin-teacher",
+    <FaUserTie className="md:text-xl font-semibold text-gray-800" />
+    // [
+    //   getItem(
+    //     "Danh sách giáo viên",
+    //     "admin-teacher",
+    //     <TeamOutlined className="md:text-xl font-semibold text-gray-800" />
+    //   ),
+    //   // getItem(
+    //   //   "Thêm giáo viên",
+    //   //   "admin-addTeacher",
+    //   //   <UserAddOutlined className="md:text-xl font-semibold text-gray-800" />
+    //   // ),
+    //   getItem(
+    //     "Thống kê",
+    //     "admin-statsTeacher",
+    //     <HiViewList className="md:text-xl font-semibold text-gray-800" />
+    //   ),
+    // ]
   ),
   getItem(
     "Quản lý học viên",
-    "studentsAdmin",
-    <FaUserGraduate className="md:text-xl font-semibold text-gray-800" />,
-    [
-      getItem(
-        "Danh sách học viên",
-        "admin-students",
-        <TeamOutlined className="md:text-xl font-semibold text-gray-800" />
-      ),
-      getItem(
-        "Thống kê",
-        "admin-statsStudents",
-        <HiViewList className="md:text-xl font-semibold text-gray-800" />
-      ),
-    ]
+    "admin-students",
+    <FaUserGraduate className="md:text-xl font-semibold text-gray-800" />
+    // [
+    //   getItem(
+    //     "Danh sách học viên",
+    //     "admin-students",
+    //     <TeamOutlined className="md:text-xl font-semibold text-gray-800" />
+    //   ),
+    //   getItem(
+    //     "Thống kê",
+    //     "admin-statsStudents",
+    //     <HiViewList className="md:text-xl font-semibold text-gray-800" />
+    //   ),
+    // ]
   ),
   getItem(
     "Quản lý lớp học",
-    "classAdmin",
-    <HiUserGroup className="md:text-xl font-semibold text-gray-800" />,
-    [
-      getItem(
-        "Danh sách lớp học",
-        "admin-class",
-        <HiOutlineClipboardList className="md:text-xl font-semibold text-gray-800" />
-      ),
-      // getItem(
-      //   "Quản lý",
-      //   "admin-addClass",
-      //   <HiOutlineDocumentAdd className="md:text-xl font-semibold text-gray-800" />
-      // ),
-      getItem(
-        "Thống kê",
-        "admin-statsClass",
-        <HiViewList className="md:text-xl font-semibold text-gray-800" />
-      ),
-    ]
+    "admin-class",
+    <HiUserGroup className="md:text-xl font-semibold text-gray-800" />
+    // [
+    //   getItem(
+    //     "Danh sách lớp học",
+    //     "admin-class",
+    //     <HiOutlineClipboardList className="md:text-xl font-semibold text-gray-800" />
+    //   ),
+    // ]
   ),
   getItem(
     "Quản lý khóa học",
@@ -137,6 +127,11 @@ const items = [
     "Học phí",
     "admin-tuition",
     <BsWallet className="md:text-xl font-semibold text-gray-800" />
+  ),
+  getItem(
+    "Thống kê học phí, tiền lương",
+    "admin-statsTuitionAndSalary",
+    <HiOutlineColorSwatch className="md:text-xl font-semibold text-gray-800" />
   ),
   getItem(
     "Quản lý khác",

@@ -130,6 +130,7 @@ export default function AdminSchedule() {
     teacher: "",
   };
   const [form] = Form.useForm();
+  const [formEdit] = Form.useForm();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [formValue, setFormValue] = useState(defaultValue);
@@ -463,7 +464,7 @@ export default function AdminSchedule() {
                     type="button"
                     onClick={onReset}
                     className="w-3/4 py-2 rounded-md font-semibold bg-gradient-to-br from-teal-300 to-lime-300 text-gray-900 hover:text-white hover:from-teal-400 hover:to-lime-400  cursor-pointer active:scale-95 dark:text-white">
-                    Reset
+                    Làm mới
                   </button>
                   <button
                     type="button"
@@ -472,7 +473,7 @@ export default function AdminSchedule() {
                       onReset();
                     }}
                     className="w-3/4 py-2 rounded-md font-semibold bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 text-gray-900 hover:from-red-300 hover:via-red-400 hover:to-yellow-500  hover:text-white cursor-pointer active:scale-95 dark:text-white">
-                    Cancel
+                    Đóng
                   </button>
                 </div>
               </div>

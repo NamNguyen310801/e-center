@@ -1,8 +1,8 @@
 import {
   ExclamationCircleFilled,
-  PlusOutlined,
   SearchOutlined,
   SyncOutlined,
+  UploadOutlined,
 } from "@ant-design/icons";
 import {
   Button,
@@ -19,6 +19,7 @@ import {
   DatePicker,
   InputNumber,
   Radio,
+  Image,
 } from "antd";
 import { useEffect, useRef, useState } from "react";
 import {
@@ -33,6 +34,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Toast from "../../../../utils/Toast";
 import {
   addStudentTuitionList,
+  deletedStudentSlice,
   setStudentId,
   setStudentList,
   updateStudentList,
@@ -60,11 +62,23 @@ export default function AdminStudent() {
   const tuitionList = useSelector((state) => state.tuition.tuitionList);
   const classList = useSelector((state) => state.classSlice.classList);
   const [emailSend, setEmailSend] = useState("");
-
   const dataTable =
     studentList?.length > 0 &&
     studentList?.map((student) => {
-      return { ...student, key: student._id };
+      return {
+        key: student?._id,
+        _id: student?._id,
+        name: student?.name,
+        avatar: student?.avatar,
+        gender: student?.gender,
+        address: student?.address,
+        email: student?.email,
+        phone: student?.phone,
+        date: student?.date,
+        tuition: student?.tuition,
+        klass: student?.klass,
+        course: student?.course,
+      };
     });
   const [rowSelectedKeys, setRowSelectedKeys] = useState([]);
   const rowSelection = {
@@ -167,6 +181,7 @@ export default function AdminStudent() {
     const res = await UserService.deleteUserAPI(id, user.access_token);
     if (res.status === "OK") {
       dispatch(deletedUserSlice(id));
+      dispatch(deletedStudentSlice(id));
       Toast("success", res.message);
     } else {
       Toast("error", res.message);
@@ -273,6 +288,7 @@ export default function AdminStudent() {
     setFormValue(defaultValue);
     setIsOpenEdit(false);
     setEmailSend("");
+    setFileList([]);
   };
   const onCancelAdd = () => {
     setIdEdit("");
@@ -552,7 +568,7 @@ export default function AdminStudent() {
         onClick={handleGetAllStudent}
       />
       <Spin spinning={isLoading} className="z-30">
-        <ExportToExcel data={studentList} fileName="danh-sach-hoc-vien" />
+        <ExportToExcel data={dataTable} fileName="danh-sach-hoc-vien" />
         {rowSelectedKeys.length > 0 && (
           <Button
             style={{
@@ -602,25 +618,21 @@ export default function AdminStudent() {
             <Input placeholder="Nhập tên" />
           </Form.Item>
           <Form.Item label="Ảnh" name="avatar">
-            <Upload
-              // action={`${createImageURL}`}
-              listType="picture-card"
-              fileList={fileList}
-              onRemove={handleRemove}
-              onPreview={handlePreview}
-              onChange={handleOnchangeImage}>
-              {fileList.length >= 1 ? null : (
-                <div>
-                  <PlusOutlined />
-                  <div
-                    style={{
-                      marginTop: 8,
-                    }}>
-                    Upload
-                  </div>
-                </div>
+            <Space style={{ display: "flex" }}>
+              {formValue?.avatar && (
+                <Avatar width={100} src={formValue?.avatar} />
               )}
-            </Upload>
+              <Upload
+                // action={`${createImageURL}`}
+                fileList={fileList}
+                onRemove={handleRemove}
+                onPreview={handlePreview}
+                onChange={handleOnchangeImage}>
+                {fileList.length >= 1 ? null : (
+                  <Button icon={<UploadOutlined />}>Upload</Button>
+                )}
+              </Upload>
+            </Space>
           </Form.Item>
           <Form.Item label="Địa chỉ" name="address">
             <Input placeholder="Nhập địa chỉ" />

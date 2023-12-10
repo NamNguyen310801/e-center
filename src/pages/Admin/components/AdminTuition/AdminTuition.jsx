@@ -44,7 +44,7 @@ export default function AdminTuition() {
     if (!tuitionList) {
       handleGetAllTuition();
     }
-  }, []);
+  }, [tuitionList]);
   const handleGetAllTuition = async () => {
     setIsLoading(true);
     const res = await TuitionService.getAllTuitionAPI();
@@ -213,7 +213,7 @@ export default function AdminTuition() {
                   <div className="w-full">
                     <Form
                       className="w-full"
-                      name="admin-schedule"
+                      name="admin-tuition"
                       labelCol={{
                         span: 10,
                       }}

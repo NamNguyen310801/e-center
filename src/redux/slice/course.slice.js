@@ -25,6 +25,7 @@ const courseSlice = createSlice({
         isComingSoon = false,
         isSelling = false,
         isCompletable = false,
+        rating = 0,
       } = action.payload;
       state.course = {
         id: _id,
@@ -40,6 +41,7 @@ const courseSlice = createSlice({
         isComingSoon: isComingSoon,
         isSelling: isSelling,
         isCompletable: isCompletable,
+        rating: rating,
       };
     },
     updateCourse: (state, action) => {

@@ -1,8 +1,8 @@
 import {
   ExclamationCircleFilled,
-  PlusOutlined,
   SearchOutlined,
   SyncOutlined,
+  UploadOutlined,
 } from "@ant-design/icons";
 import {
   Button,
@@ -264,6 +264,7 @@ export default function AdminTeacher() {
     form.resetFields();
     setFormValue(defaultValue);
     setIsOpenEdit(false);
+    setFileList([]);
   };
   const onOkEdit = () => {
     editTeacher(idEdit, formValue);
@@ -582,25 +583,21 @@ export default function AdminTeacher() {
             <Input placeholder="Nhập tên" />
           </Form.Item>
           <Form.Item label="Ảnh" name="avatar">
-            <Upload
-              // action={`${createImageURL}`}
-              listType="picture-card"
-              fileList={fileList}
-              onRemove={handleRemove}
-              onPreview={handlePreview}
-              onChange={handleOnchangeImage}>
-              {fileList.length >= 1 ? null : (
-                <div>
-                  <PlusOutlined />
-                  <div
-                    style={{
-                      marginTop: 8,
-                    }}>
-                    Upload
-                  </div>
-                </div>
+            <Space style={{ display: "flex" }}>
+              {formValue?.avatar && (
+                <Avatar width={100} src={formValue?.avatar} />
               )}
-            </Upload>
+              <Upload
+                // action={`${createImageURL}`}
+                fileList={fileList}
+                onRemove={handleRemove}
+                onPreview={handlePreview}
+                onChange={handleOnchangeImage}>
+                {fileList.length >= 1 ? null : (
+                  <Button icon={<UploadOutlined />}>Upload</Button>
+                )}
+              </Upload>
+            </Space>
           </Form.Item>
           <Form.Item
             label="Địa chỉ"

@@ -74,6 +74,9 @@ export const updateCourseURL = `${url}/course/update`;
 export const getAllCourseURL = `${url}/course/getAll`;
 export const getDetailCourseURL = `${url}/course/get-detail`;
 export const deleteCourseURL = `${url}/course/delete-course`;
+export const createRatingURL = `${url}/course/create-review`;
+export const updateCourseRatingURL = `${url}/course/update-rating`;
+
 export const courseURL = `${url}/course`;
 
 //LESSON

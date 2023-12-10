@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FaUsers } from "react-icons/fa";
 import { convertPrice } from "../utils/function";
 import { useSelector } from "react-redux";
-
+import { Rate } from "antd";
 export default function CourseItem({ isPro = false, item = {} }) {
   const user = useSelector((state) => state.auth.user);
   const studentList = useSelector((state) => state.student.studentList);
@@ -59,14 +59,27 @@ export default function CourseItem({ isPro = false, item = {} }) {
             </Link>
           )}
 
-          <h3 className="font-semibold">
-            <a
-              href=""
-              target="_self"
-              className="break-words line-clamp-1 text-base/[1.4] text-[#292929] overflow-hidden ">
+          <h3 className="font-semibold flex gap-x-2">
+            <Link
+              to={`${item?._id}`}
+              className="break-words line-clamp-1 text-base/[1.4] text-[#292929] overflow-hidden">
               {item?.name}
-            </a>
+            </Link>
           </h3>
+          <div className="flex items-center">
+            <div className="flex items-center">
+              <Rate
+                value={!Boolean(item?.rating) ? 3 : item?.rating}
+                disabled
+              />
+            </div>
+            <p className="ml-3 text-sm font-medium text-gray-700">
+              {!Boolean(item?.rating) ? 3 : item?.rating}/5
+            </p>
+            <p className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+              117 đánh giá
+            </p>
+          </div>
           {isPro && (
             <>
               <div className="bg-black/30 rounded-lg absolute top-3 p-[5px] w-[26px] pointer-events-none left-3">

@@ -8,3 +8,4 @@ export { default as AdminCourse } from "./AdminCourse/AdminCourse";
 export { default as AdminLesson } from "./AdminLesson/AdminLesson";
 export { default as AdminTuition } from "./AdminTuition/AdminTuition";
 export { default as AdminDifferent } from "./AdminDifferent/AdminDifferent";
+export { default as AdminStats } from "./AdminStats/AdminStats";

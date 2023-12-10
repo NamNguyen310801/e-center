@@ -8,7 +8,7 @@ export default function VideoItem({ src }) {
           style={{
             objectPosition: "50% 50%",
           }}
-          className="w-full h-full top-0 left-0 right-0 bottom-0 object-fill max-w-[100%] absolute "
+          className="w-full h-full top-0 left-0 right-0 bottom-0 object-fill max-w-[100%] absolute rounded-md"
           src={src}
           frameBorder="0"
           title="This is an example website"

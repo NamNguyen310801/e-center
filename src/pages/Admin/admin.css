@@ -255,3 +255,99 @@
 .admin-tuition .ant-table-tbody > tr > td.ant-table-cell-row-hover {
   background: #b9a1ae !important;
 }
+/* AD-Less*/
+.admin-lesson .ant-table.ant-table-bordered {
+  background: #c3c5bc !important;
+}
+.admin-lesson .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #128caa;
+}
+.admin-lesson .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #515548 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-lesson .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-lesson .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-lesson .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-lesson .ant-table-column-sort {
+  background: transparent;
+}
+.admin-lesson .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #9a9e95 !important;
+}
+/* AD-Course*/
+.admin-course .ant-table.ant-table-bordered {
+  background: #b6c0be !important;
+}
+.admin-course .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #128caa;
+}
+.admin-course .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #696e74 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-course .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-course .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-course .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-course .ant-table-column-sort {
+  background: transparent;
+}
+.admin-course .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #a2beb9 !important;
+}
+/* AD-Course*/
+.admin-image .ant-table.ant-table-bordered {
+  background: #b6c0be !important;
+}
+.admin-image .ant-switch:hover:not(.ant-switch-disabled) {
+  background-color: #128caa;
+}
+.admin-image .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #696e74 !important;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+.admin-image .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-image .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.admin-image .ant-table-tbody > tr > td {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(38, 43, 51);
+}
+.admin-image .ant-table-column-sort {
+  background: transparent;
+}
+.admin-image .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #a2beb9 !important;
+}

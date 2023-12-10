@@ -133,3 +133,234 @@ export const workbook2blob = (workbook) => {
   });
   return blob;
 };
+
+export const calculateMonthlyTuitionSummary = (students) => {
+  const monthlyTuitionSummary = {};
+  students?.forEach((student) => {
+    student?.tuitionList.forEach((tuition) => {
+      const monthYear = new Date(tuition.createdAt).toLocaleString("en-US", {
+        month: "numeric",
+        year: "numeric",
+      });
+      const tuitionAmount = tuition?.amountFee;
+      if (!monthlyTuitionSummary[monthYear]) {
+        monthlyTuitionSummary[monthYear] = {
+          total: 0,
+          unPaid: 0,
+          paid: 0,
+        };
+      }
+      // Tổng học phí
+      monthlyTuitionSummary[monthYear].total += tuitionAmount;
+      if (tuition?.status === false) {
+        monthlyTuitionSummary[monthYear].unPaid += tuitionAmount;
+      }
+      if (tuition?.status === true) {
+        monthlyTuitionSummary[monthYear].paid += tuitionAmount;
+      }
+    });
+  });
+  // Chuyển đối tượng thành mảng đối tượng
+  const resultArray = Object.keys(monthlyTuitionSummary).map((month) => ({
+    month,
+    ...monthlyTuitionSummary[month],
+  }));
+
+  return resultArray;
+};
+export const calculateQuarterlyTuitionSummary = (students) => {
+  const quarterlyTuitionSummary = {};
+
+  students?.forEach((student) => {
+    student?.tuitionList.forEach((tuition) => {
+      const transactionDate = new Date(tuition.createdAt);
+      // Xác định quý
+      const quarter = Math.floor((transactionDate.getMonth() + 3) / 3);
+
+      const tuitionAmount = tuition?.amountFee;
+      if (!quarterlyTuitionSummary[quarter]) {
+        quarterlyTuitionSummary[quarter] = {
+          total: 0,
+          unPaid: 0,
+          paid: 0,
+        };
+      }
+      quarterlyTuitionSummary[quarter].total += tuitionAmount;
+      if (tuition?.status === false) {
+        quarterlyTuitionSummary[quarter].unPaid += tuitionAmount;
+      }
+      if (tuition?.status === true) {
+        quarterlyTuitionSummary[quarter].paid += tuitionAmount;
+      }
+    });
+  });
+  const resultArray = Object.keys(quarterlyTuitionSummary).map((quarter) => ({
+    quarter: `${quarter}/${new Date().getFullYear()}`,
+    ...quarterlyTuitionSummary[quarter],
+  }));
+  return resultArray;
+};
+export const calculateYearlyTuitionSummary = (students) => {
+  const yearlyTuitionSummary = {};
+  students?.forEach((student) => {
+    student?.tuitionList.forEach((tuition) => {
+      const year = new Date(tuition.createdAt).getFullYear();
+      const tuitionAmount = tuition?.amountFee;
+      if (!yearlyTuitionSummary[year]) {
+        yearlyTuitionSummary[year] = {
+          total: 0,
+          unPaid: 0,
+          paid: 0,
+        };
+      }
+
+      yearlyTuitionSummary[year].total += tuitionAmount;
+      if (tuition?.status === false) {
+        yearlyTuitionSummary[year].unPaid += tuitionAmount;
+      }
+      if (tuition?.status === true) {
+        yearlyTuitionSummary[year].paid += tuitionAmount;
+      }
+    });
+  }); // Chuyển đối tượng thành mảng đối tượng
+  const resultArray = Object.keys(yearlyTuitionSummary).map((year) => ({
+    year: parseInt(year),
+    ...yearlyTuitionSummary[year],
+  }));
+
+  return resultArray;
+};
+export const calculateTuitionByClass = (students) => {
+  const tuitionByClassSummary = {};
+  students?.forEach((student) => {
+    const klass = student?.klass;
+    student?.tuitionList.forEach((tuition) => {
+      const tuitionAmount = tuition?.amountFee;
+
+      // Khởi tạo giá trị mảng cho lớp nếu chưa tồn tại
+      if (!tuitionByClassSummary[klass]) {
+        tuitionByClassSummary[klass] = {
+          total: 0,
+          unPaid: 0,
+          paid: 0,
+        };
+      }
+      // Tổng học phí
+      tuitionByClassSummary[klass].total += tuitionAmount;
+
+      // Tổng học phí với status false
+      if (tuition.status === false) {
+        tuitionByClassSummary[klass].unPaid += tuitionAmount;
+      }
+
+      // Tổng học phí với status true
+      if (tuition.status === true) {
+        tuitionByClassSummary[klass].paid += tuitionAmount;
+      }
+    });
+  });
+
+  // Chuyển đối tượng thành mảng đối tượng
+  const resultArray = Object.keys(tuitionByClassSummary).map((klass) => ({
+    klass,
+    ...tuitionByClassSummary[klass],
+  }));
+
+  return resultArray;
+};
+export const calculateMonthlySalarySummary = (teachers) => {
+  const monthlySalarySummary = {};
+  teachers?.forEach((teacher) => {
+    teacher?.salaryList.forEach((salary) => {
+      const monthYear = new Date(salary.createdAt).toLocaleString("en-US", {
+        month: "numeric",
+        year: "numeric",
+      });
+      const salaryAmount = salary?.amountSalary;
+      if (!monthlySalarySummary[monthYear]) {
+        monthlySalarySummary[monthYear] = {
+          total: 0,
+          unPaid: 0,
+          paid: 0,
+        };
+      }
+      // Tổng học phí
+      monthlySalarySummary[monthYear].total += salaryAmount;
+      if (salary.status === false) {
+        monthlySalarySummary[monthYear].unPaid += salaryAmount;
+      }
+      if (salary.status === true) {
+        monthlySalarySummary[monthYear].paid += salaryAmount;
+      }
+    });
+  });
+  // Chuyển đối tượng thành mảng đối tượng
+  const resultArray = Object.keys(monthlySalarySummary).map((month) => ({
+    month,
+    ...monthlySalarySummary[month],
+  }));
+
+  return resultArray;
+};
+export const calculateYearlySalarySummary = (teachers) => {
+  const yearlySalarySummary = {};
+  teachers?.forEach((teacher) => {
+    teacher?.salaryList.forEach((salary) => {
+      const year = new Date(salary.createdAt).getFullYear();
+      const salaryAmount = salary?.amountSalary;
+      if (!yearlySalarySummary[year]) {
+        yearlySalarySummary[year] = {
+          total: 0,
+          unPaid: 0,
+          paid: 0,
+        };
+      }
+
+      yearlySalarySummary[year].total += salaryAmount;
+      if (salary?.status === false) {
+        yearlySalarySummary[year].unPaid += salaryAmount;
+      }
+      if (salary?.status === true) {
+        yearlySalarySummary[year].paid += salaryAmount;
+      }
+    });
+  }); // Chuyển đối tượng thành mảng đối tượng
+  const resultArray = Object.keys(yearlySalarySummary).map((year) => ({
+    year: parseInt(year),
+    ...yearlySalarySummary[year],
+  }));
+
+  return resultArray;
+};
+export const calculateQuarterlySalarySummary = (teachers) => {
+  const quarterlySalarySummary = {};
+
+  teachers?.forEach((teacher) => {
+    teacher?.salaryList.forEach((salary) => {
+      const transactionDate = new Date(salary.createdAt);
+      // Xác định quý
+      const quarter = Math.floor((transactionDate.getMonth() + 3) / 3);
+
+      const salaryAmount = salary?.amountSalary;
+      if (!quarterlySalarySummary[quarter]) {
+        quarterlySalarySummary[quarter] = {
+          total: 0,
+          unPaid: 0,
+          paid: 0,
+        };
+      }
+      quarterlySalarySummary[quarter].total += salaryAmount;
+      if (salary?.status === false) {
+        quarterlySalarySummary[quarter].unPaid += salaryAmount;
+      }
+      if (salary?.status === true) {
+        quarterlySalarySummary[quarter].paid += salaryAmount;
+      }
+    });
+  });
+  const resultArray = Object.keys(quarterlySalarySummary).map((quarter) => ({
+    quarter: `${quarter}/${new Date().getFullYear()}`,
+    ...quarterlySalarySummary[quarter],
+  }));
+  return resultArray;
+};

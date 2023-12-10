@@ -440,7 +440,7 @@ export default function AdminUser() {
         onClick={handleGetAllUser}
       />
       <div className="flex gap-x-6 w-full">
-        <div className="flex gap-8 bg-lightOverlay transition duration-700 min-w-[60px] relative">
+        <div className="flex gap-8 bg-lightOverlay transition duration-700 min-w-[80px] relative">
           <Tooltip title="Thêm Người dùng" placement="right">
             <button
               className={`${

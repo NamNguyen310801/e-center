@@ -14,6 +14,8 @@ import { getAllClassAPI } from "../../services/class.api";
 import { setClassList } from "../../redux/slice/class.slice";
 import { setSalaryList } from "../../redux/slice/salary.slice";
 import { getAllSalaryAPI } from "../../services/salary.api";
+import { setTuitionList } from "../../redux/slice/tuition.slice";
+import { getAllTuitionAPI } from "../../services/tuition.api";
 export default function Admin() {
   const dispatch = useDispatch();
   const teacherList = useSelector((state) => state.teacher.teacherList);
@@ -21,6 +23,8 @@ export default function Admin() {
   const classList = useSelector((state) => state.classSlice.classList);
   const salaryList = useSelector((state) => state.salary.salaryList);
   const courseList = useSelector((state) => state.course.courseList);
+  const tuitionList = useSelector((state) => state.tuition.tuitionList);
+
   // *****API
   useEffect(() => {
     if (!studentList) {
@@ -47,6 +51,11 @@ export default function Admin() {
       handleGetAllSalary();
     }
   }, []);
+  useEffect(() => {
+    if (!tuitionList) {
+      handleGetAllTuition();
+    }
+  }, [tuitionList]);
   const handleGetAllSalary = async () => {
     const res = await getAllSalaryAPI();
     if (res.status === "OK") {
@@ -74,6 +83,13 @@ export default function Admin() {
   const handleGetClassList = async () => {
     const res = await getAllClassAPI();
     dispatch(setClassList(res?.data));
+  };
+
+  const handleGetAllTuition = async () => {
+    const res = await getAllTuitionAPI();
+    if (res.status === "OK") {
+      dispatch(setTuitionList(res?.data));
+    }
   };
   return (
     <>

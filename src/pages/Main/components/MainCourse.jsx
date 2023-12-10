@@ -1,8 +1,10 @@
 import React from "react";
 import ItemCourse from "./ItemCourse";
 import ButtonSign from "../../../components/ButtonSign";
+import { useSelector } from "react-redux";
 
 export default function MainCourse() {
+  const courseList = useSelector((state) => state.course.courseList);
   return (
     <section className="relative container mx-auto px-4 z-[1] w-full bg-white text-gray-600 pb-8">
       <div className="w-full basis-full pb-8">
@@ -22,10 +24,9 @@ export default function MainCourse() {
         </p>
       </div>
       <div className="w-full flex py-8 flex-col md:flex-row flex-wrap">
-        <ItemCourse />
-        <ItemCourse />
-        <ItemCourse />
-        <ItemCourse />
+        {courseList?.slice(0, 4)?.map((item, index) => (
+          <ItemCourse item={item} key={index} />
+        ))}
       </div>
       <div className="w-full flex justify-center items-center">
         <ButtonSign />

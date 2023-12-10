@@ -35,6 +35,9 @@ const videoSlice = createSlice({
     setVideoList: (state, action) => {
       state.videoList = action.payload;
     },
+    addToVideoList: (state, action) => {
+      state.videoList.push(action.payload);
+    },
     updateVideoList: (state, action) => {
       const videoEdit = action.payload;
       state.videoList?.find((videoItem, index) => {
@@ -62,6 +65,7 @@ export const {
   updateVideo,
   resetVideo,
   setVideoList,
+  addToVideoList,
   updateVideoList,
   deletedVideoSlice,
 } = videoSlice.actions;

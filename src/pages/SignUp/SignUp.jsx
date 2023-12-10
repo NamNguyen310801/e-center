@@ -34,7 +34,7 @@ export default function SignUp() {
         form.resetFields();
         setFormValue(defaultValue);
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 1500);
       }
     } catch (error) {

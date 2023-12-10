@@ -29,6 +29,7 @@ const ROUTER = {
   ADSALARY: "/admin-salary",
   ADTUITION: "/admin-tuition",
   ADDIFF: "/admin-different",
+  ADDSTATS:"/admin-statsTuitionAndSalary",
   //Nav-Home
   LOTRINH: "/lo-trinh-hoc",
   KHOAHOC: "/khoa-hoc",

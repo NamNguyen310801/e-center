@@ -2,9 +2,11 @@ import axios from "axios";
 import {
   courseURL,
   createCourseURL,
+  createRatingURL,
   deleteCourseURL,
   getAllCourseURL,
   getDetailCourseURL,
+  updateCourseRatingURL,
   updateCourseURL,
 } from "./routers";
 import { axiosJWT } from "./user.api";
@@ -148,6 +150,23 @@ export const getAllCourseAPI = async () => {
 export const getDetailCourseAPI = async (id) => {
   try {
     const res = await axios.get(`${getDetailCourseURL}/${id}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+// Lay chi tiet
+export const createRatingAPI = async (data) => {
+  try {
+    const res = await axios.post(`${createRatingURL}`, data);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+}; // Lay chi tiet
+export const updateCourseRatingAPI = async (data) => {
+  try {
+    const res = await axios.put(`${updateCourseRatingURL}`, data);
     return res.data;
   } catch (error) {
     return error;

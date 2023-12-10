@@ -2,6 +2,7 @@ import {
   ExclamationCircleFilled,
   PlusOutlined,
   SyncOutlined,
+  UploadOutlined,
 } from "@ant-design/icons";
 import {
   Button,
@@ -12,6 +13,7 @@ import {
   InputNumber,
   Modal,
   Select,
+  Space,
   Spin,
   Table,
   Tooltip,
@@ -205,10 +207,12 @@ export default function AdminCourse() {
   }, [formValue2, form1]);
   const onReset = () => {
     setFormValue(defaultValue);
+    setFileList([]);
     form.resetFields();
   };
   const onReset2 = () => {
     setFormValue2(defaultValue2);
+    setFileList([]);
     form1.resetFields();
   };
   // Cap nhat gia tri form
@@ -343,6 +347,7 @@ export default function AdminCourse() {
   };
   //Tat modal xem anh
   const handleCancelPreview = () => setPreviewOpen(false);
+  //
   const handleClick = (id) => {
     dispatch(setShowCourse(true));
     dispatch(setCourseId(id));
@@ -386,7 +391,7 @@ export default function AdminCourse() {
       title: "Mô tả",
       dataIndex: "description",
       render: (row) => (
-        <p>{row?.length > 10 ? row.slice(0, 10) + "... " : row}</p>
+        <p>{row?.length > 15 ? row.slice(0, 15) + "... " : row}</p>
       ),
     },
     {
@@ -415,7 +420,7 @@ export default function AdminCourse() {
       render: (row, index) => (
         <div
           key={index}
-          className="flex items-center justify-between gap-x-2 max-w-[150px]">
+          className="flex items-center justify-between gap-x-2 max-w-[120px]">
           <ButtonAdd onClick={() => openAdd(row)} />
           <ButtonEdit onClick={() => openEdit(row)} />
           <ButtonDelete onClick={() => showDeleteConfirm(row?._id)} />
@@ -424,7 +429,7 @@ export default function AdminCourse() {
     },
   ];
   return (
-    <main className="relative user-schedule container mx-auto p-0 my-0 flex min-h-[100vh]">
+    <main className="relative admin-course container mx-auto p-0 my-0 flex min-h-[100vh]">
       <div className="pt-0 px-4 md:pt-2 lg:px-0 flex flex-col flex-1 w-full">
         <div className="mb-8 lg:mb-10 flex flex-col w-full">
           <h1 className="font-black text-xl text-[#242424]">
@@ -432,7 +437,7 @@ export default function AdminCourse() {
           </h1>
         </div>
         <div className="flex gap-x-6 w-full">
-          <div className="flex gap-8 bg-lightOverlay transition duration-700 lg:min-w-[60px] max-h-[600px] relative">
+          <div className="flex gap-8 bg-lightOverlay transition duration-700 lg:min-w-[80px] max-h-[600px] relative">
             <Tooltip title="Thêm Khóa học" placement="right">
               <button
                 className={`${
@@ -595,7 +600,7 @@ export default function AdminCourse() {
               </div>
             </div>
           </div>
-          <div className="relative w-full lg:-mt-10">
+          <div className="relative w-full lg:-mt-11">
             <h2 className="font-semibold mb-4 text-lg text-[#424242] text-center">
               Danh sách Khóa học
             </h2>
@@ -658,25 +663,21 @@ export default function AdminCourse() {
                   message: "Vui lòng nhập thông tin!",
                 },
               ]}>
-              <Upload
-                // action={`${createImageURL}`}
-                listType="picture-card"
-                fileList={fileList}
-                onRemove={handleRemove}
-                onPreview={handlePreview}
-                onChange={handleOnchangeImage}>
-                {fileList.length >= 1 ? null : (
-                  <div>
-                    <PlusOutlined />
-                    <div
-                      style={{
-                        marginTop: 8,
-                      }}>
-                      Upload
-                    </div>
-                  </div>
+              <Space style={{ display: "flex" }}>
+                {formValue?.thumbnail && (
+                  <Image width={100} src={formValue?.thumbnail} />
                 )}
-              </Upload>
+                <Upload
+                  // action={`${createImageURL}`}
+                  fileList={fileList}
+                  onRemove={handleRemove}
+                  onPreview={handlePreview}
+                  onChange={handleOnchangeImage}>
+                  {fileList.length >= 1 ? null : (
+                    <Button icon={<UploadOutlined />}>Upload</Button>
+                  )}
+                </Upload>
+              </Space>
             </Form.Item>
             <Form.Item label="Giảm giá" name="discount">
               <InputNumber

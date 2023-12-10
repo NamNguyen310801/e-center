@@ -30,6 +30,9 @@ const imageSlice = createSlice({
     setImageList: (state, action) => {
       state.imageList = action.payload;
     },
+    addToImageList: (state, action) => {
+      state.imageList.push(action.payload);
+    },
     updateImageList: (state, action) => {
       const imageEdit = action.payload;
       state.imageList?.find((imageItem, index) => {
@@ -55,6 +58,7 @@ export const {
   updateImage,
   resetImage,
   setImageList,
+  addToImageList,
   updateImageList,
   deletedImageSlice,
 } = imageSlice.actions;

@@ -25,3 +25,4 @@ export { default as ButtonAdd } from "./ButtonAdd";
 export { default as ButtonEdit } from "./ButtonEdit";
 export { default as ButtonDelete } from "./ButtonDelete";
 export { default as ExportToExcel } from "./ExportToExcel";
+export { default as RateButton } from "./RateButton";

@@ -1,11 +1,11 @@
 import React from "react";
-import RecentOrders from "./components/dasboard/RecentOrders";
-import PopularProducts from "./components/dasboard/PopularProducts";
 import {
+  CourseChart,
+  CoursePieChart,
   DashboardStatsGrid,
   StudentProfilePieChart,
   TeacherProfilePieChart,
-} from "./components/dasboard";
+} from "./components";
 
 export default function AdminHome() {
   return (
@@ -13,13 +13,14 @@ export default function AdminHome() {
       <DashboardStatsGrid />
       <div className="flex flex-row gap-4 w-full h-[22rem]">
         <StudentProfilePieChart />
+      </div>
+      <div className="flex flex-row gap-4 w-full h-[22rem]">
         <TeacherProfilePieChart />
       </div>
-      <div className="flex flex-row gap-4 w-full">
-        {/* <RecentOrders />
-        <PopularProducts /> */}
+      <div className="flex flex-row gap-4 w-full h-[22rem]">
+        <CoursePieChart />
+        <CourseChart />
       </div>
-      {/* <OrderAdminDetail onClose={handleOnClose} /> */}
     </div>
   );
 }

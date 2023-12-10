@@ -2,6 +2,7 @@ import {
   ExclamationCircleFilled,
   PlusOutlined,
   SyncOutlined,
+  UploadOutlined,
 } from "@ant-design/icons";
 import {
   Form,
@@ -15,6 +16,8 @@ import {
   FloatButton,
   Spin,
   Image,
+  Space,
+  Button,
 } from "antd";
 import { useEffect, useState } from "react";
 import * as LessonService from "../../../../services/lesson.api";
@@ -112,6 +115,7 @@ export default function AdminLesson() {
     position: 1,
   };
   const [form] = Form.useForm();
+  const [formEdit] = Form.useForm();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
 
@@ -135,6 +139,7 @@ export default function AdminLesson() {
     });
   }, [formValue, form]);
   const onReset = () => {
+    setFileList([]);
     setFormValue(defaultValue);
     form.resetFields();
   };
@@ -264,7 +269,7 @@ export default function AdminLesson() {
     },
   ];
   return (
-    <main className="relative user-schedule container mx-auto p-0 my-0 flex min-h-[100vh]">
+    <div className="relative admin-lesson container mx-auto p-0 my-0 flex min-h-[100vh]">
       <div className="pt-0 px-4 md:pt-2 lg:px-0 flex flex-col flex-1 w-full">
         <div className="mb-8 lg:mb-10 flex flex-col w-full">
           <h1 className="font-black text-xl text-[#242424]">Quản lý bài học</h1>
@@ -393,7 +398,7 @@ export default function AdminLesson() {
                     type="button"
                     onClick={onReset}
                     className="w-3/4 py-2 rounded-md font-semibold bg-gradient-to-br from-teal-300 to-lime-300 text-gray-900 hover:text-white hover:from-teal-400 hover:to-lime-400  cursor-pointer active:scale-95 dark:text-white">
-                    Reset
+                    Làm mới
                   </button>
                   <button
                     type="button"
@@ -402,13 +407,13 @@ export default function AdminLesson() {
                       onReset();
                     }}
                     className="w-3/4 py-2 rounded-md font-semibold bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 text-gray-900 hover:from-red-300 hover:via-red-400 hover:to-yellow-500  hover:text-white cursor-pointer active:scale-95 dark:text-white">
-                    Cancel
+                    Đóng
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          <div className="relative w-full">
+          <div className="relative w-full -mt-11">
             <h3 className="font-semibold mb-4 text-lg text-[#424242] text-center">
               Danh sách Bài học
             </h3>
@@ -474,25 +479,21 @@ export default function AdminLesson() {
                   message: "Vui lòng nhập thông tin!",
                 },
               ]}>
-              <Upload
-                // action={`${createImageURL}`}
-                listType="picture-card"
-                fileList={fileList}
-                onRemove={handleRemove}
-                onPreview={handlePreview}
-                onChange={handleOnchangeImage}>
-                {fileList.length >= 1 ? null : (
-                  <div>
-                    <PlusOutlined />
-                    <div
-                      style={{
-                        marginTop: 8,
-                      }}>
-                      Upload
-                    </div>
-                  </div>
+              <Space style={{ display: "flex" }}>
+                {formValue?.thumbnail && (
+                  <Image width={100} src={formValue?.thumbnail} />
                 )}
-              </Upload>
+                <Upload
+                  // action={`${createImageURL}`}
+                  fileList={fileList}
+                  onRemove={handleRemove}
+                  onPreview={handlePreview}
+                  onChange={handleOnchangeImage}>
+                  {fileList.length >= 1 ? null : (
+                    <Button icon={<UploadOutlined />}>Upload</Button>
+                  )}
+                </Upload>
+              </Space>
             </Form.Item>
             <Form.Item label="Mô tả" name="description">
               <Input placeholder="Nhập mô tả" />
@@ -527,6 +528,6 @@ export default function AdminLesson() {
           />
         </Modal>
       </div>
-    </main>
+    </div>
   );
 }

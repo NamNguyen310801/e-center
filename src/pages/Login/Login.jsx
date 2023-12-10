@@ -54,7 +54,6 @@ export default function Login() {
   // };
   const handleGetDetailsUser = async (id, token) => {
     const res = await UserService.getDetailUserAPI(id, token);
-    console.log(res);
     dispatch(setUser({ ...res?.data, access_token: token }));
   };
 

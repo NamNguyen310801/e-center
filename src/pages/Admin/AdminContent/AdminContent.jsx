@@ -9,6 +9,7 @@ import {
   AdminLesson,
   AdminSalary,
   AdminSchedule,
+  AdminStats,
   AdminStudent,
   AdminTeacher,
   AdminTuition,
@@ -29,7 +30,8 @@ export default function AdminContent() {
         <Route path={ROUTER.ADSTUDENT} element={<AdminStudent />} />
 
         <Route path={ROUTER.ADCLASS} element={<AdminClass />} />
-
+        <Route path={ROUTER.ADDSTATS} element={<AdminStats />} />
+        
         <Route path={ROUTER.ADCOURSE} element={<AdminCourse />} />
 
         <Route path={ROUTER.ADSCHEDULE} element={<AdminSchedule />} />

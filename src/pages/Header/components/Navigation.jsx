@@ -80,55 +80,57 @@ export default function Navigation() {
       </ul>
       {Boolean(user?.email) ? (
         <div className="flex items-center justify-between min-w-[200px] ml-8 px-2 gap-x-4">
-          <Popover className="relative">
-            {({ open }) => (
-              <>
-                <Popover.Button
-                  className={classNames(
-                    open && "bg-gray-100",
-                    "group inline-flex items-center rounded-sm p-1.5 text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
-                  )}>
-                  <Tooltip title={"Khóa học của tôi"}>
-                    <BiBookReader className="text-[28px]" />
-                  </Tooltip>
-                </Popover.Button>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-200"
-                  enterFrom="opacity-0 translate-y-1"
-                  enterTo="opacity-100 translate-y-0"
-                  leave="transition ease-in duration-150"
-                  leaveFrom="opacity-100 translate-y-0"
-                  leaveTo="opacity-0 translate-y-1">
-                  <Popover.Panel className="absolute right-[-110px] lg:right-0 z-10 mt-2.5 lg:transform w-350  overflow-hidden rounded-lg">
-                    <div className="bg-white shadow-md ring-1 ring-black ring-opacity-5 px-3 py-4 rounded-lg overflow-hidden transition-all duration-300 ease-in-out">
-                      <div className="flex items-center mb-2">
-                        <strong className="text-gray-700 font-medium my-0 mx-2">
-                          Khóa học của tôi
-                        </strong>
-                        <Link
-                          className="ml-auto text-sm p-2 text-[#343a8a]"
-                          to={"/user/my-courses"}>
-                          Xem tất cả
-                        </Link>
+          {user?.role === 3 && (
+            <Popover className="relative">
+              {({ open }) => (
+                <>
+                  <Popover.Button
+                    className={classNames(
+                      open && "bg-gray-100",
+                      "group inline-flex items-center rounded-sm p-1.5 text-gray-700 hover:text-opacity-100 focus:outline-none active:bg-gray-100"
+                    )}>
+                    <Tooltip title={"Khóa học của tôi"}>
+                      <BiBookReader className="text-[28px]" />
+                    </Tooltip>
+                  </Popover.Button>
+                  <Transition
+                    as={Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="opacity-100 translate-y-0"
+                    leaveTo="opacity-0 translate-y-1">
+                    <Popover.Panel className="absolute right-[-110px] lg:right-0 z-10 mt-2.5 lg:transform w-350  overflow-hidden rounded-lg">
+                      <div className="bg-white shadow-md ring-1 ring-black ring-opacity-5 px-3 py-4 rounded-lg overflow-hidden transition-all duration-300 ease-in-out">
+                        <div className="flex items-center mb-2">
+                          <strong className="text-gray-700 font-medium my-0 mx-2">
+                            Khóa học của tôi
+                          </strong>
+                          <Link
+                            className="ml-auto text-sm p-2 text-[#343a8a]"
+                            to={"/user/my-courses"}>
+                            Xem tất cả
+                          </Link>
+                        </div>
+                        <div className="flex flex-col py-2 gap-y-2 w-full max-h-[250px] overflow-y-auto overscroll-contain">
+                          {student?.course?.length === 0 ? (
+                            <div className="text-base flex items-center justify-center py-3 h-16 text-gray-800">
+                              Bạn chưa học khóa học nào!
+                            </div>
+                          ) : (
+                            student?.course?.map((item, index) => (
+                              <MyCoursesItem item={item} key={index} />
+                            ))
+                          )}
+                        </div>
                       </div>
-                      <div className="flex flex-col py-2 gap-y-2 w-full max-h-[250px] overflow-y-auto overscroll-contain">
-                        {student?.course?.length === 0 ? (
-                          <div className="text-base flex items-center justify-center py-3 h-16 text-gray-800">
-                            Bạn chưa học khóa học nào!
-                          </div>
-                        ) : (
-                          student?.course?.map((item, index) => (
-                            <MyCoursesItem item={item} key={index} />
-                          ))
-                        )}
-                      </div>
-                    </div>
-                  </Popover.Panel>
-                </Transition>
-              </>
-            )}
-          </Popover>
+                    </Popover.Panel>
+                  </Transition>
+                </>
+              )}
+            </Popover>
+          )}
           <Popover className="relative">
             {({ open }) => (
               <>

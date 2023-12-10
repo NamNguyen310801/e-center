@@ -380,9 +380,9 @@ export default function AdminClass() {
         Danh sách Lớp học
       </h2>
       <div className="flex gap-x-6 w-full">
-        <div className="flex flex-col gap-y-6 w-full relative">
+        <div className="flex flex-col gap-y-6 relative">
           {/* Thêm lớp học*/}
-          <div className=" flex gap-8 bg-lightOverlay transition duration-700 min-w-[320px]">
+          <div className="flex gap-8 bg-lightOverlay transition duration-700 min-w-[80px]">
             <Tooltip title="Thêm Lớp học" placement="bottom">
               <button
                 className={` transition duration-700 rounded-lg w-20 h-20 border-dashed border border-gray-300 hover:text-blue-500 hover:border-blue-500`}
@@ -397,7 +397,7 @@ export default function AdminClass() {
             <div
               className={`${
                 isOpen1 ? " " : "hidden"
-              } absolute top-0 right-0 bg-white flex gap-8 mx-auto transition duration-700 min-w-[320px]`}>
+              } absolute top-0 left-0 z-[2] bg-white flex gap-8 mx-auto transition duration-700 min-w-[320px]`}>
               <div className="border border-gray-300 rounded-md p-4 w-full flex flex-col items-center justify-center gap-4">
                 <h3 className="px-4 py-[10px] text-xl text-blue-500 font-semibold">
                   Thêm Lớp học
@@ -452,7 +452,6 @@ export default function AdminClass() {
                     className="w-3/4 py-2 rounded-md font-semibold bg-gradient-to-br from-purple-500 to-blue-400 text-gray-900 hover:from-purple-600 hover:to-blue-500 dark:text-white hover:text-white hover:bg-blue-500 cursor-pointer active:scale-95">
                     Thêm
                   </button>
-
                   <button
                     type="button"
                     onClick={onReset}
@@ -488,7 +487,7 @@ export default function AdminClass() {
             <div
               className={`${
                 isOpen2 ? " " : "hidden"
-              } absolute top-0 right-0 flex gap-8 mx-auto transition duration-700 w-[320px]`}>
+              } absolute top-0 left-0 bg-white flex gap-8 mx-auto transition duration-700 min-w-[320px] z-[2]`}>
               <div className="border border-gray-300 rounded-md p-4 w-full flex flex-col items-center justify-center gap-4">
                 <h3 className="px-4 py-[10px] text-xl text-blue-500 font-semibold">
                   Thêm học viên vào lớp
@@ -514,6 +513,7 @@ export default function AdminClass() {
                         ]}>
                         <Select
                           filterOption={filterOption}
+                          allowClear
                           placeholder="Chọn học viên"
                           mode="multiple"
                           style={{
