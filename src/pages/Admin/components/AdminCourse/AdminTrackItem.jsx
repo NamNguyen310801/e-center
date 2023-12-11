@@ -48,9 +48,7 @@ export default function AdminTrackItem({ item }) {
   const handleValuesChange = (changedValues, allValues) => {
     setFormValue((prevData) => ({ ...prevData, ...changedValues }));
   };
-  const filterOption = (input, option) => {
-    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
-  };
+
   const handleAddValueChange = (changedValues, allValues) => {
     setFormAddValue((prevData) => ({ ...prevData, ...changedValues }));
   };
@@ -244,7 +242,14 @@ export default function AdminTrackItem({ item }) {
         open={isOpenEditTrack}
         title="Sửa chương học"
         onCancel={() => onCancelEdit()}
-        onOk={() => onOkEdit()}>
+        onOk={() => {
+          form
+            .validateFields()
+            .then(() => onOkEdit())
+            .catch((info) => {
+              console.log("Validate Failed:", info);
+            });
+        }}>
         <Form
           form={form}
           onValuesChange={handleValuesChange}
@@ -305,7 +310,14 @@ export default function AdminTrackItem({ item }) {
         open={isOpenAddLesson}
         title="Thêm bài học vào chương"
         onCancel={() => onCancelAddLesson()}
-        onOk={() => onOkAddLesson()}>
+        onOk={() => {
+          form2
+            .validateFields()
+            .then(() => onOkAddLesson())
+            .catch((info) => {
+              console.log("Validate Failed:", info);
+            });
+        }}>
         <Form
           onValuesChange={handleAddValueChange}
           name={`addLesson${item?.title}`}
@@ -323,7 +335,7 @@ export default function AdminTrackItem({ item }) {
             <Select
               placeholder="Chọn bài học"
               mode="multiple"
-              filterOption={filterOption}>
+              optionFilterProp="label">
               {lessonList?.map((lesson) => (
                 <Select.Option
                   key={lesson._id}

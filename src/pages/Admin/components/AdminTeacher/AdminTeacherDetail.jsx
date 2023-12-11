@@ -300,7 +300,14 @@ export default function AdminTeacherDetail({ onClose }) {
               open={isOpenEdit}
               title="Cập nhật lương giáo viên"
               onCancel={() => onCancel()}
-              onOk={() => onOkEdit()}>
+              onOk={() => {
+                form
+                  .validateFields()
+                  .then(() => onOkEdit())
+                  .catch((info) => {
+                    console.log("Validate Failed:", info);
+                  });
+              }}>
               <Form
                 form={form}
                 onValuesChange={handleValuesChange}

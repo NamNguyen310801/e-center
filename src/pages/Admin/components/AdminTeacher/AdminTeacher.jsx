@@ -553,7 +553,14 @@ export default function AdminTeacher() {
         open={isOpenEdit}
         title="Cập nhật Giảng viên"
         onCancel={() => onCancel()}
-        onOk={() => onOkEdit()}>
+        onOk={() => {
+          form
+            .validateFields()
+            .then(() => onOkEdit())
+            .catch((info) => {
+              console.log("Validate Failed:", info);
+            });
+        }}>
         <Form
           form={form}
           onValuesChange={handleValuesChange}
@@ -658,10 +665,19 @@ export default function AdminTeacher() {
             label="Ngày sinh"
             name="date"
             rules={[
-              {
-                pattern: isDateBeforeToday(form?.getFieldsValue),
-                message: "Ngày sinh phải cách hiện tại ít nhất 5 năm",
-              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  const currentDate = new Date();
+                  const fiveYearsAgo = new Date();
+                  fiveYearsAgo.setFullYear(currentDate.getFullYear() - 5);
+                  if (value && isDateBeforeToday(value)) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error("Ngày sinh phải cách hiện tại ít nhất 5 năm")
+                  );
+                },
+              }),
             ]}>
             <DatePicker format={"DD/MM/YYYY"} placeholder="Nhập ngày sinh" />
           </Form.Item>
@@ -683,7 +699,14 @@ export default function AdminTeacher() {
         open={isOpenAdd}
         title="Thêm lương giáo viên"
         onCancel={() => onCancelAdd()}
-        onOk={() => onOkAdd()}>
+        onOk={() => {
+          form2
+            .validateFields()
+            .then(() => onOkAdd())
+            .catch((info) => {
+              console.log("Validate Failed:", info);
+            });
+        }}>
         <Form
           form={form2}
           onValuesChange={handleValuesChange2}

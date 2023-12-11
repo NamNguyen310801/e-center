@@ -600,10 +600,23 @@ export default function AdminUser() {
                       label="Ngày sinh"
                       name="date"
                       rules={[
-                        {
-                          pattern: isDateBeforeToday(form?.getFieldsValue),
-                          message: "Ngày sinh phải cách hiện tại ít nhất 5 năm",
-                        },
+                        ({ getFieldValue }) => ({
+                          validator(_, value) {
+                            const currentDate = new Date();
+                            const fiveYearsAgo = new Date();
+                            fiveYearsAgo.setFullYear(
+                              currentDate.getFullYear() - 5
+                            );
+                            if (value && isDateBeforeToday(value)) {
+                              return Promise.resolve();
+                            }
+                            return Promise.reject(
+                              new Error(
+                                "Ngày sinh phải cách hiện tại ít nhất 5 năm"
+                              )
+                            );
+                          },
+                        }),
                       ]}>
                       <DatePicker
                         format={"DD/MM/YYYY"}
@@ -689,7 +702,14 @@ export default function AdminUser() {
             open={isOpenEdit}
             title="Cập nhật Người dùng"
             onCancel={() => onCancel()}
-            onOk={() => onOkEdit()}>
+            onOk={() => {
+              formEdit
+                .validateFields()
+                .then(() => onOkEdit())
+                .catch((info) => {
+                  console.log("Validate Failed:", info);
+                });
+            }}>
             <Form
               form={formEdit}
               onValuesChange={handleValuesChange}
@@ -781,10 +801,19 @@ export default function AdminUser() {
                 label="Ngày sinh"
                 name="date"
                 rules={[
-                  {
-                    pattern: isDateBeforeToday(formEdit?.getFieldsValue),
-                    message: "Ngày sinh phải cách hiện tại ít nhất 5 năm",
-                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      const currentDate = new Date();
+                      const fiveYearsAgo = new Date();
+                      fiveYearsAgo.setFullYear(currentDate.getFullYear() - 5);
+                      if (value && isDateBeforeToday(value)) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error("Ngày sinh phải cách hiện tại ít nhất 5 năm")
+                      );
+                    },
+                  }),
                 ]}>
                 <DatePicker
                   format={"DD/MM/YYYY"}

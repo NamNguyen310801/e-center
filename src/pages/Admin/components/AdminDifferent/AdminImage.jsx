@@ -388,7 +388,14 @@ export default function AdminImage() {
           open={isOpenEdit}
           title="Cập nhật Hình ảnh"
           onCancel={() => onCancel()}
-          onOk={() => onOkEdit()}>
+          onOk={() => {
+            form
+              .validateFields()
+              .then(() => onOkEdit())
+              .catch((info) => {
+                console.log("Validate Failed:", info);
+              });
+          }}>
           <Form
             form={formEdit}
             onValuesChange={handleValuesChange}

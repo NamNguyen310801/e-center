@@ -293,7 +293,7 @@ export default function Personal() {
                       onChange={(value) => {
                         setData((prev) => ({
                           ...prev,
-                          date: value ? value.format() : "",
+                          date: value ? value?.format() : "",
                         }));
                         if (!isDateBeforeToday(value)) {
                           setError((pre) => ({ ...pre, errDate: true }));

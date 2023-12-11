@@ -23,7 +23,11 @@ import * as CourseService from "../src/services/course.api";
 import * as ClassService from "../src/services/class.api";
 import * as VideoService from "../src/services/video.api";
 import { setUserList } from "./redux/slice/user.slice";
-import { setUser, updateAccessToken } from "./redux/slice/auth.slice";
+import {
+  resetUser,
+  setUser,
+  updateAccessToken,
+} from "./redux/slice/auth.slice";
 import { setScheduleList } from "./redux/slice/schedule.slice";
 import { setCourseList } from "./redux/slice/course.slice";
 import { setClassList } from "./redux/slice/class.slice";
@@ -63,31 +67,42 @@ function App() {
   }, []);
   //
   const handleGetDetailsUser = async (id, token) => {
+    let storageRefreshToken = localStorage.getItem("refresh_token");
+    const refreshToken = JSON.parse(storageRefreshToken);
     const res = await UserService.getDetailUserAPI(id, token);
     if (res.status === "OK") {
-      dispatch(setUser({ ...res?.data, access_token: token }));
+      dispatch(
+        setUser({
+          ...res?.data,
+          access_token: token,
+          refresh_token: refreshToken,
+        })
+      );
     }
   };
-  // UserService.axiosJWT.interceptors.request.use(
-  //   async (config) => {
-  //     let date = new Date();
-  //     const { decoded } = handleDecoded();
-  //     if (decoded.exp < date.getTime() / 1000) {
-  //       try {
-  //         const data = await UserService.refreshTokenAPI();
-  //         console.log(data);
-  //         dispatch(updateAccessToken(data?.access_token));
-  //         config.headers["Authorization"] = data?.access_token;
-  //       } catch (error) {
-  //         console.error("Error refreshing token:", error);
-  //       }
-  //     }
-  //     return config;
-  //   },
-  //   (err) => {
-  //     return Promise.reject(err);
-  //   }
-  // );
+
+  UserService.axiosJWT.interceptors.request.use(
+    async (config) => {
+      const currentTime = new Date();
+      const { decoded } = handleDecoded();
+      let storageRefreshToken = localStorage.getItem("refresh_token");
+      const refreshToken = JSON.parse(storageRefreshToken);
+      const decodedRefreshToken = jwt_decode(refreshToken);
+      if (decoded?.exp < currentTime.getTime() / 1000) {
+        if (decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
+          const data = await UserService.refreshTokenAPI(refreshToken);
+          dispatch(updateAccessToken(data?.access_token));
+          config.headers["Authorization"] = data?.access_token;
+        } else {
+          dispatch(resetUser());
+        }
+      }
+      return config;
+    },
+    (err) => {
+      return Promise.reject(err);
+    }
+  );
 
   const handleGetUserList = async () => {
     const res = await UserService.getAllUserAPI();

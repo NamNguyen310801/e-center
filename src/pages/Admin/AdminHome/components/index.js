@@ -4,3 +4,6 @@ export { default as DashboardStatsGrid } from "./DashboardStatsGrid";
 export { default as CoursePieChart } from "./CoursePieChart";
 export { default as CourseChart } from "./CourseChart";
 export { default as StudentTuitionPieChart } from "./StudentTuitionPieChart";
+export { default as StudentClassChart } from "./StudentClassChart";
+export { default as TeacherSalaryPieChart } from "./TeacherSalaryPieChart";
+export { default as StudentCourseChart } from "./StudentCourseChart";

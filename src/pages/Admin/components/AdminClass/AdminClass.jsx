@@ -423,15 +423,7 @@ export default function AdminClass() {
                         ]}>
                         <Input placeholder="Nhập tên lớp" />
                       </Form.Item>
-                      <Form.Item
-                        label="Khóa học"
-                        name="course"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Vui lòng nhập thông tin!",
-                          },
-                        ]}>
+                      <Form.Item label="Khóa học" name="course">
                         <Select placeholder="Chọn khóa học">
                           {courseList?.map((course) => (
                             <Select.Option
@@ -512,7 +504,7 @@ export default function AdminClass() {
                           },
                         ]}>
                         <Select
-                          filterOption={filterOption}
+                          optionFilterProp="label"
                           allowClear
                           placeholder="Chọn học viên"
                           mode="multiple"
@@ -522,7 +514,7 @@ export default function AdminClass() {
                           {studentList?.map((student) => (
                             <Select.Option
                               key={student._id}
-                              value={student?.id}
+                              value={student?._id}
                               label={student?.name}>
                               <div
                                 style={{
@@ -625,7 +617,14 @@ export default function AdminClass() {
           open={isOpenEdit}
           title="Cập nhật lớp học"
           onCancel={() => onCancel()}
-          onOk={() => onOkEdit()}>
+          onOk={() => {
+            form
+              .validateFields()
+              .then(() => onOkEdit())
+              .catch((info) => {
+                console.log("Validate Failed:", info);
+              });
+          }}>
           <Form
             form={form}
             onValuesChange={handleValuesChange}
@@ -643,15 +642,7 @@ export default function AdminClass() {
               ]}>
               <Input placeholder="Nhập tên lớp" />
             </Form.Item>
-            <Form.Item
-              label="Khóa học"
-              name="course"
-              rules={[
-                {
-                  required: true,
-                  message: "Vui lòng nhập thông tin!",
-                },
-              ]}>
+            <Form.Item label="Khóa học" name="course">
               <Select placeholder="Chọn khóa học">
                 {courseList?.map((course) => (
                   <Select.Option value={course?.name} key={course._id}>

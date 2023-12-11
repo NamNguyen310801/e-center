@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BarChart,
   Bar,
@@ -16,7 +16,10 @@ import {
   calculateQuarterlySalarySummary,
   calculateYearlySalarySummary,
 } from "../../../../utils/function";
+import { getAllTeacherAPI } from "../../../../services/user.api";
+import { setTeacherList } from "../../../../redux/slice/teacher.slice";
 export default function AdminTeacherStats() {
+  const dispatch = useDispatch();
   const teacherList = useSelector((state) => state.teacher.teacherList);
   const [dataMonthly, setDataMonthly] = useState([]);
   const [dataQuarterly, setDataQuarterly] = useState([]);
@@ -27,10 +30,20 @@ export default function AdminTeacherStats() {
   const [monthData, setMonthData] = useState("");
   const [quarterData, setQuarterData] = useState("");
   const [yearData, setYearData] = useState("");
+  const handleGetAllTeacher = async () => {
+    const res = await getAllTeacherAPI();
+    if (res.status === "OK") {
+      dispatch(setTeacherList(res?.data));
+    }
+  };
   useEffect(() => {
-    setDataMonthly(calculateMonthlySalarySummary(teacherList));
-    setDataYearly(calculateYearlySalarySummary(teacherList));
-    setDataQuarterly(calculateQuarterlySalarySummary(teacherList));
+    if (teacherList) {
+      setDataMonthly(calculateMonthlySalarySummary(teacherList));
+      setDataYearly(calculateYearlySalarySummary(teacherList));
+      setDataQuarterly(calculateQuarterlySalarySummary(teacherList));
+    } else {
+      handleGetAllTeacher();
+    }
   }, [teacherList]);
   const monthsList = dataMonthly?.map((item) => item?.month);
   const quartersList = dataQuarterly?.map((item) => item?.quarter);

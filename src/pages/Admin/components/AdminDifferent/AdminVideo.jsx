@@ -334,9 +334,16 @@ export default function AdminVideo() {
         <Modal
           forceRender
           open={isOpenEdit}
-          title="Cập nhật Hình video"
+          title="Cập nhật Video"
           onCancel={() => onCancel()}
-          onOk={() => onOkEdit()}>
+          onOk={() => {
+            form
+              .validateFields()
+              .then(() => onOkEdit())
+              .catch((info) => {
+                console.log("Validate Failed:", info);
+              });
+          }}>
           <Form
             form={formEdit}
             onValuesChange={handleValuesChange}

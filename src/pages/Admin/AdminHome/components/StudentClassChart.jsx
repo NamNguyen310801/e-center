@@ -1,20 +1,15 @@
 import { CChart } from "@coreui/react-chartjs";
 import { useSelector } from "react-redux";
-export default function CourseChart() {
-  const courseList = useSelector((state) => state.course.courseList);
-  const comingSoonCourse = courseList?.filter(
-    (course) => course?.isComingSoon
-  ).length;
-  const sellingCourse = courseList?.filter(
-    (course) => course?.isSelling
-  ).length;
-  const completedCourse = courseList?.filter(
-    (course) => course?.isCompletable
-  ).length;
+import { countStudentsByClass } from "../../../../utils/function";
+export default function StudentClassChart() {
+  const studentList = useSelector((state) => state.student.studentList);
+  const data = countStudentsByClass(studentList);
+  const labelsData = data?.map((item) => (item?.name ? item?.name : "Không"));
+  const datasetsData = data?.map((item) => item?.value);
   return (
     <div className="w-[22rem] h-[22rem] bg-white p-4 rounded-sm border border-gray-200 ">
       <strong className="text-gray-700 font-medium">
-        Danh sách khóa học theo tình trạng
+        Danh sách học viên theo lớp
       </strong>
       <div className="border-x border-gray-200 rounded-sm mt-3 w-[20rem]">
         <div className="flex w-full gap-4">
@@ -23,12 +18,12 @@ export default function CourseChart() {
               <CChart
                 type="bar"
                 data={{
-                  labels: ["Sắp ra mắt", "Đang mở", "Đã hoàn thành"],
+                  labels: [...labelsData],
                   datasets: [
                     {
-                      label: "Số lượng khóa học",
-                      backgroundColor: "#F5DEB3",
-                      data: [comingSoonCourse, sellingCourse, completedCourse],
+                      label: "Số lượng học viên",
+                      backgroundColor: "#B0C4DE",
+                      data: [...datasetsData],
                     },
                   ],
                 }}

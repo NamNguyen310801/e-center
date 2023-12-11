@@ -629,7 +629,14 @@ export default function AdminCourse() {
           open={isOpenEdit}
           title="Cập nhật khóa học"
           onCancel={() => onCancel()}
-          onOk={() => onOkEdit()}>
+          onOk={() => {
+            form
+              .validateFields()
+              .then(() => onOkEdit())
+              .catch((info) => {
+                console.log("Validate Failed:", info);
+              });
+          }}>
           <Form
             form={form}
             onValuesChange={handleValuesChange}

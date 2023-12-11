@@ -3,8 +3,12 @@ import {
   CourseChart,
   CoursePieChart,
   DashboardStatsGrid,
+  StudentClassChart,
+  StudentCourseChart,
   StudentProfilePieChart,
+  StudentTuitionPieChart,
   TeacherProfilePieChart,
+  TeacherSalaryPieChart,
 } from "./components";
 
 export default function AdminHome() {
@@ -13,13 +17,15 @@ export default function AdminHome() {
       <DashboardStatsGrid />
       <div className="flex flex-row gap-4 w-full h-[22rem]">
         <StudentProfilePieChart />
-      </div>
-      <div className="flex flex-row gap-4 w-full h-[22rem]">
+        <StudentTuitionPieChart />
         <TeacherProfilePieChart />
+        <TeacherSalaryPieChart />
+        <CoursePieChart />
       </div>
       <div className="flex flex-row gap-4 w-full h-[22rem]">
-        <CoursePieChart />
         <CourseChart />
+        <StudentClassChart />
+        <StudentCourseChart />
       </div>
     </div>
   );

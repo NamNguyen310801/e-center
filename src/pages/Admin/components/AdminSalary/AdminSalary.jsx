@@ -337,7 +337,14 @@ export default function AdminSalary() {
           open={isOpenEdit}
           title="Cập nhật múc lương"
           onCancel={() => onCancel()}
-          onOk={() => onOkEdit()}>
+          onOk={() => {
+            form
+              .validateFields()
+              .then(() => onOkEdit())
+              .catch((info) => {
+                console.log("Validate Failed:", info);
+              });
+          }}>
           <Form
             form={form}
             onValuesChange={handleValuesChange}

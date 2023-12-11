@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   BarChart,
   Bar,
@@ -18,8 +18,12 @@ import {
 } from "../../../../utils/function";
 import { useEffect, useState } from "react";
 import { Select } from "antd";
+import { setStudentList } from "../../../../redux/slice/student.slice";
+import { getAllStudentAPI } from "../../../../services/user.api";
 
 export default function AdminStudentStats() {
+  const dispatch = useDispatch();
+
   const studentList = useSelector((state) => state.student.studentList);
   const [dataMonthly, setDataMonthly] = useState([]);
   const [dataQuarterly, setDataQuarterly] = useState([]);
@@ -33,12 +37,21 @@ export default function AdminStudentStats() {
   const [quarterData, setQuarterData] = useState("");
   const [yearData, setYearData] = useState("");
   const [klassData, setKlassData] = useState("");
-
+  const handleGetAllStudent = async () => {
+    const res = await getAllStudentAPI();
+    if (res.status === "OK") {
+      dispatch(setStudentList(res.data));
+    }
+  };
   useEffect(() => {
-    setDataMonthly(calculateMonthlyTuitionSummary(studentList));
-    setDataYearly(calculateYearlyTuitionSummary(studentList));
-    setDataQuarterly(calculateQuarterlyTuitionSummary(studentList));
-    setDataKlass(calculateTuitionByClass(studentList));
+    if (studentList) {
+      setDataMonthly(calculateMonthlyTuitionSummary(studentList));
+      setDataYearly(calculateYearlyTuitionSummary(studentList));
+      setDataQuarterly(calculateQuarterlyTuitionSummary(studentList));
+      setDataKlass(calculateTuitionByClass(studentList));
+    } else {
+      handleGetAllStudent();
+    }
   }, [studentList]);
 
   const monthsList = dataMonthly?.map((item) => item?.month);

@@ -16,6 +16,8 @@ import { setSalaryList } from "../../redux/slice/salary.slice";
 import { getAllSalaryAPI } from "../../services/salary.api";
 import { setTuitionList } from "../../redux/slice/tuition.slice";
 import { getAllTuitionAPI } from "../../services/tuition.api";
+import { getAllImageAPI } from "../../services/image.api";
+import { setImageList } from "../../redux/slice/image.slice";
 export default function Admin() {
   const dispatch = useDispatch();
   const teacherList = useSelector((state) => state.teacher.teacherList);
@@ -24,38 +26,50 @@ export default function Admin() {
   const salaryList = useSelector((state) => state.salary.salaryList);
   const courseList = useSelector((state) => state.course.courseList);
   const tuitionList = useSelector((state) => state.tuition.tuitionList);
+  const imageList = useSelector((state) => state.image.imageList);
 
   // *****API
   useEffect(() => {
     if (!studentList) {
       handleGetAllStudent();
     }
-  }, []);
+  }, [studentList]);
   useEffect(() => {
     if (!teacherList) {
       handleGetAllTeacher();
     }
-  }, []);
+  }, [teacherList]);
   useEffect(() => {
     if (!courseList) {
       handleGetCourseList();
     }
-  }, []);
+  }, [courseList]);
   useEffect(() => {
     if (!classList) {
       handleGetClassList();
     }
-  }, []);
+  }, [classList]);
   useEffect(() => {
     if (!salaryList) {
       handleGetAllSalary();
     }
-  }, []);
+  }, [salaryList]);
   useEffect(() => {
     if (!tuitionList) {
       handleGetAllTuition();
     }
   }, [tuitionList]);
+  useEffect(() => {
+    if (!imageList) {
+      handleGetImageList();
+    }
+  }, [imageList]);
+  const handleGetImageList = async () => {
+    const res = await getAllImageAPI();
+    if (res.status === "OK") {
+      dispatch(setImageList(res?.data));
+    }
+  };
   const handleGetAllSalary = async () => {
     const res = await getAllSalaryAPI();
     if (res.status === "OK") {

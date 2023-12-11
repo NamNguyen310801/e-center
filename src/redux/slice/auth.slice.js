@@ -21,6 +21,7 @@ const authSlice = createSlice({
         intro = "",
         createdAt = "",
         access_token,
+        refresh_token,
       } = action.payload;
       state.user = {
         id: _id,
@@ -36,6 +37,7 @@ const authSlice = createSlice({
         coverImage: coverImage,
         createdAt: createdAt,
         access_token: access_token,
+        refresh_token: refresh_token,
       };
     },
     updateAccessToken: (state, action) => {

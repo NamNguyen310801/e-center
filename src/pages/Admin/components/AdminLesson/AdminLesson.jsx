@@ -442,7 +442,14 @@ export default function AdminLesson() {
           open={isOpenEdit}
           title="Cập nhật bài học"
           onCancel={() => onCancel()}
-          onOk={() => onOkEdit()}>
+          onOk={() => {
+            form
+              .validateFields()
+              .then(() => onOkEdit())
+              .catch((info) => {
+                console.log("Validate Failed:", info);
+              });
+          }}>
           <Form
             form={form}
             onValuesChange={handleValuesChange}

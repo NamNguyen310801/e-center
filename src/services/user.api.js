@@ -57,11 +57,19 @@ export const registerAPI = async (data) => {
   }
 };
 // refreshTokenURL
-export const refreshTokenAPI = async () => {
+export const refreshTokenAPI = async (refToken) => {
   try {
-    const res = await axios.post(`${refreshTokenURL}`, {
-      withCredentials: true,
-    });
+    const res = await axios.post(
+      `${refreshTokenURL}`,
+      {
+        withCredentials: true,
+      },
+      {
+        headers: {
+          Authorization: refToken,
+        },
+      }
+    );
     return res.data;
   } catch (error) {
     return error;

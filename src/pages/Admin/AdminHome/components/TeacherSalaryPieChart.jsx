@@ -1,8 +1,18 @@
 import { useSelector } from "react-redux";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
+import { countTeachersBySalary } from "../../../../utils/function";
 
 const RADIAN = Math.PI / 180;
-const COLORS = ["#4682B4", "#EE82EE", "#9ACD32"];
+const COLORS = [
+  "#00C49F",
+  "#FFBB28",
+  "#FF8042",
+  "#8B008B",
+  "#6495ED",
+  "#8A2BE2",
+  "#FFF8DC",
+  "#FFF8DC",
+];
 
 const renderCustomizedLabel = ({
   cx,
@@ -27,27 +37,13 @@ const renderCustomizedLabel = ({
     </text>
   );
 };
-
-export default function TeacherProfilePieChart() {
+export default function TeacherSalaryPieChart() {
   const teacherList = useSelector((state) => state.teacher.teacherList);
-  const Male = teacherList?.filter(
-    (teacher) => teacher?.gender === "Nam"
-  ).length;
-  const Female = teacherList?.filter(
-    (teacher) => teacher?.gender === "Nữ"
-  ).length;
-  const Other = teacherList?.filter(
-    (teacher) => teacher?.gender !== "Nữ" && teacher?.gender !== "Nam"
-  ).length;
-  const data = [
-    { name: "Nam", value: Male },
-    { name: "Nữ", value: Female },
-    { name: "Khác", value: Other },
-  ];
+  const data = countTeachersBySalary(teacherList);
   return (
     <div className="w-[20rem] h-[22rem] bg-white p-4 rounded-sm border border-gray-200 flex flex-col">
       <strong className="text-gray-700 font-medium">
-        Thông tin Giảng viên
+        Giảng viên theo mức lương
       </strong>
       <div className="mt-3 w-full flex-1 text-xs">
         <ResponsiveContainer width="100%" height="100%">

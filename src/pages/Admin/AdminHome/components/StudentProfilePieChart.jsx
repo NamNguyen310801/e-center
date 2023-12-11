@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts";
 
 const RADIAN = Math.PI / 180;
-const COLORS = ["#41B883", "#E46651", "#FF8042"];
+const COLORS = ["#4682B4", "#EE82EE", "#9ACD32"];
 
 const renderCustomizedLabel = ({
   cx,

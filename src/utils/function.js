@@ -136,7 +136,7 @@ export const workbook2blob = (workbook) => {
 
 export const calculateMonthlyTuitionSummary = (students) => {
   const monthlyTuitionSummary = {};
-  students?.forEach((student) => {
+  students.forEach((student) => {
     student?.tuitionList.forEach((tuition) => {
       const monthYear = new Date(tuition.createdAt).toLocaleString("en-US", {
         month: "numeric",
@@ -171,7 +171,7 @@ export const calculateMonthlyTuitionSummary = (students) => {
 export const calculateQuarterlyTuitionSummary = (students) => {
   const quarterlyTuitionSummary = {};
 
-  students?.forEach((student) => {
+  students.forEach((student) => {
     student?.tuitionList.forEach((tuition) => {
       const transactionDate = new Date(tuition.createdAt);
       // Xác định quý
@@ -202,7 +202,7 @@ export const calculateQuarterlyTuitionSummary = (students) => {
 };
 export const calculateYearlyTuitionSummary = (students) => {
   const yearlyTuitionSummary = {};
-  students?.forEach((student) => {
+  students.forEach((student) => {
     student?.tuitionList.forEach((tuition) => {
       const year = new Date(tuition.createdAt).getFullYear();
       const tuitionAmount = tuition?.amountFee;
@@ -232,7 +232,7 @@ export const calculateYearlyTuitionSummary = (students) => {
 };
 export const calculateTuitionByClass = (students) => {
   const tuitionByClassSummary = {};
-  students?.forEach((student) => {
+  students.forEach((student) => {
     const klass = student?.klass;
     student?.tuitionList.forEach((tuition) => {
       const tuitionAmount = tuition?.amountFee;
@@ -270,7 +270,7 @@ export const calculateTuitionByClass = (students) => {
 };
 export const calculateMonthlySalarySummary = (teachers) => {
   const monthlySalarySummary = {};
-  teachers?.forEach((teacher) => {
+  teachers.forEach((teacher) => {
     teacher?.salaryList.forEach((salary) => {
       const monthYear = new Date(salary.createdAt).toLocaleString("en-US", {
         month: "numeric",
@@ -304,7 +304,7 @@ export const calculateMonthlySalarySummary = (teachers) => {
 };
 export const calculateYearlySalarySummary = (teachers) => {
   const yearlySalarySummary = {};
-  teachers?.forEach((teacher) => {
+  teachers.forEach((teacher) => {
     teacher?.salaryList.forEach((salary) => {
       const year = new Date(salary.createdAt).getFullYear();
       const salaryAmount = salary?.amountSalary;
@@ -335,7 +335,7 @@ export const calculateYearlySalarySummary = (teachers) => {
 export const calculateQuarterlySalarySummary = (teachers) => {
   const quarterlySalarySummary = {};
 
-  teachers?.forEach((teacher) => {
+  teachers.forEach((teacher) => {
     teacher?.salaryList.forEach((salary) => {
       const transactionDate = new Date(salary.createdAt);
       // Xác định quý
@@ -361,6 +361,70 @@ export const calculateQuarterlySalarySummary = (teachers) => {
   const resultArray = Object.keys(quarterlySalarySummary).map((quarter) => ({
     quarter: `${quarter}/${new Date().getFullYear()}`,
     ...quarterlySalarySummary[quarter],
+  }));
+  return resultArray;
+};
+export const countStudentsByClass = (students) => {
+  const studentCountByClass = {};
+  students.forEach((student) => {
+    const klass = student?.klass;
+    if (!studentCountByClass[klass]) {
+      studentCountByClass[klass] = 0;
+    }
+    studentCountByClass[klass]++;
+  });
+  const resultArray = Object.keys(studentCountByClass).map((klass) => ({
+    name: klass,
+    value: studentCountByClass[klass],
+  }));
+  return resultArray;
+};
+export const countStudentsByTuition = (students) => {
+  const studentCountByTuition = {};
+  students.forEach((student) => {
+    const tuition = student?.tuition;
+    if (!studentCountByTuition[tuition]) {
+      studentCountByTuition[tuition] = 0;
+    }
+    studentCountByTuition[tuition]++;
+  });
+  const resultArray = Object.keys(studentCountByTuition).map((tuition) => ({
+    name: tuition,
+    value: studentCountByTuition[tuition],
+  }));
+  return resultArray;
+};
+export const countStudentsByCourse = (students, courses) => {
+  const studentCountByCourse = {};
+  students.forEach((student) => {
+    student?.course?.forEach((course) => {
+      const courseId = course?.courseId;
+      const courseName = courses?.find((c) => c._id === courseId)?.name;
+      if (!studentCountByCourse[courseName]) {
+        studentCountByCourse[courseName] = 0;
+      }
+      studentCountByCourse[courseName]++;
+    });
+  });
+  const resultArray = Object.keys(studentCountByCourse).map((courseName) => ({
+    name: courseName,
+    value: studentCountByCourse[courseName],
+  }));
+
+  return resultArray;
+};
+export const countTeachersBySalary = (teachers) => {
+  const teacherCountBySalary = {};
+  teachers.forEach((teacher) => {
+    const salary = teacher?.salary;
+    if (!teacherCountBySalary[salary]) {
+      teacherCountBySalary[salary] = 0;
+    }
+    teacherCountBySalary[salary]++;
+  });
+  const resultArray = Object.keys(teacherCountBySalary).map((salary) => ({
+    name: salary,
+    value: teacherCountBySalary[salary],
   }));
   return resultArray;
 };
