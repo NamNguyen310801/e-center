@@ -22,6 +22,7 @@ import * as ScheduleService from "../src/services/schedule.api";
 import * as CourseService from "../src/services/course.api";
 import * as ClassService from "../src/services/class.api";
 import * as VideoService from "../src/services/video.api";
+import * as ImageService from "../src/services/image.api";
 import { setUserList } from "./redux/slice/user.slice";
 import {
   resetUser,
@@ -34,6 +35,7 @@ import { setClassList } from "./redux/slice/class.slice";
 import { setTeacherList } from "./redux/slice/teacher.slice";
 import { setStudentList } from "./redux/slice/student.slice";
 import { setVideoList } from "./redux/slice/video.slice";
+import { setImageList } from "./redux/slice/image.slice";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +50,7 @@ function App() {
     handleGetUserList();
     handleGetAllTeacher();
     handleGetVideoList();
+    handleGetImageList();
     handleGetAllStudent();
     setTimeout(() => {
       setIsLoading(false);
@@ -131,7 +134,12 @@ function App() {
       dispatch(setCourseList(res?.data));
     }
   };
-
+  const handleGetImageList = async () => {
+    const res = await ImageService.getAllImageAPI();
+    if (res.status === "OK") {
+      dispatch(setImageList(res?.data));
+    }
+  };
   //
   const handleGetClassList = async () => {
     const res = await ClassService.getAllClassAPI();
