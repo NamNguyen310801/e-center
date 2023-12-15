@@ -95,6 +95,7 @@ export default function AdminCourse() {
         handleGetAllCourse();
         form.resetFields();
         setFormValue(defaultValue);
+        setFileList([]);
       }
     } catch (error) {
       Toast("error", error);
@@ -284,8 +285,7 @@ export default function AdminCourse() {
   };
   const onCancel = () => {
     setIdEdit("");
-    form.resetFields();
-    setFormValue(defaultValue);
+    onReset();
     setIsOpenEdit(false);
   };
   const onOkEdit = () => {

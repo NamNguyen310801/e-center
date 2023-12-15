@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPlaying } from "../redux/slice/learning.slice";
 export default function LessonItem({ lesson }) {
   const dispatch = useDispatch();
-
+  const min = Math.floor(Math.random() * (9 - 1 + 1)) + 1;
+  const second = Math.floor(Math.random() * (60 - 0 + 1)) + 0;
   const lessonList = useSelector((state) => state.learning.lessonList);
   return (
     <div
@@ -24,7 +25,9 @@ export default function LessonItem({ lesson }) {
           ) : (
             <FaCirclePlay className="text-[#888]" />
           )}
-          <span>10:34</span>
+          <span>
+            {min > 9 ? min : `0${min}`}:{second > 9 ? second : `0${second}`}
+          </span>
         </p>
       </div>
       {!lesson?.isPublished && (

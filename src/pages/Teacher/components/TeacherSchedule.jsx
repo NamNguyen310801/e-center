@@ -6,15 +6,17 @@ import { caHocList } from "../../../utils/stringsUtils";
 
 export default function TeacherSchedule() {
   const scheduleList = useSelector((state) => state.schedule.scheduleList);
-
+  const user = useSelector((state) => state.auth.user);
   const dataTable =
     scheduleList?.length > 0 &&
-    scheduleList?.map((schedule) => {
-      return {
-        ...schedule,
-        key: schedule._id,
-      };
-    });
+    scheduleList
+      ?.filter((schedule) => schedule?.teacher === user?.name || "")
+      ?.map((schedule) => {
+        return {
+          ...schedule,
+          key: schedule._id,
+        };
+      });
 
   //=========== Column table
   //func search
@@ -136,7 +138,6 @@ export default function TeacherSchedule() {
     {
       title: "Giảng viên",
       dataIndex: "teacher",
-      ...getColumnSearchProps("Giảng viên", "teacher"),
     },
   ];
 

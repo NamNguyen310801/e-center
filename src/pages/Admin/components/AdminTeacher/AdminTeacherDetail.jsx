@@ -13,6 +13,7 @@ import {
   updateSalaryTeacherList,
 } from "../../../../redux/slice/teacher.slice";
 import { Avatar } from "../../../../assets";
+import { confirmSalaryAPI } from "../../../../services/email.api";
 const { confirm } = Modal;
 
 export default function AdminTeacherDetail({ onClose }) {
@@ -63,6 +64,9 @@ export default function AdminTeacherDetail({ onClose }) {
           },
         })
       );
+      if (data?.status) {
+        await confirmSalaryAPI({ email: teacher?.email });
+      }
       onCancel();
     } else {
       Toast("error", res.message);

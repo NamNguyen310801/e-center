@@ -1,41 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SearchOutlined, SyncOutlined } from "@ant-design/icons";
-import {
-  Button,
-  FloatButton,
-  Spin,
-  Table,
-  Avatar,
-  Space,
-  Input,
-  Select,
-} from "antd";
-import dayjs from "dayjs";
-import * as UserService from "../../../services/user.api";
+import { getAllStudentAPI } from "../../../services/user.api";
 import { setStudentList } from "../../../redux/slice/student.slice";
-import { ExcelExport } from "./ExcelExport";
-export default function TeacherStudent() {
+import { Avatar, Button, Input, Space, Table } from "antd";
+import dayjs from "dayjs";
+import { SearchOutlined } from "@ant-design/icons";
+
+export default function UserClass() {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
-  const [klass, setKlass] = useState("");
-  const user = useSelector((state) => state.auth.user);
   const studentList = useSelector((state) => state.student.studentList);
-  const scheduleList = useSelector((state) => state.schedule.scheduleList);
-  const teacherClassList = [
-    ...new Set(
-      scheduleList
-        ?.filter((schedule) => schedule?.teacher === user?.name)
-        ?.map((item) => item?.nameClass)
-    ),
-  ];
+  const user = useSelector((state) => state.auth.user);
+  const [student, setStudent] = useState("");
+  useEffect(() => {
+    setStudent(studentList?.find((student) => student?.email === user?.email));
+  }, [user?.email]);
   const dataTable =
     studentList?.length > 0 &&
     studentList
-      ?.filter((student) => {
-        return teacherClassList?.some((klass) => klass === student?.klass);
-      })
-      ?.filter((student) => student?.klass?.includes(klass))
+      ?.filter((std) => std?.klass === student?.klass)
       ?.map((student, index) => {
         return {
           key: index + 1,
@@ -49,23 +31,17 @@ export default function TeacherStudent() {
           address: student?.address,
         };
       });
-  // *****API
   useEffect(() => {
     if (!studentList) {
       handleGetAllStudent();
     }
   }, [studentList]);
   const handleGetAllStudent = async () => {
-    setIsLoading(true);
-    const res = await UserService.getAllStudentAPI();
+    const res = await getAllStudentAPI();
     if (res.status === "OK") {
       dispatch(setStudentList(res.data));
     }
-    setIsLoading(false);
   };
-
-  //=========== Column table
-  //func search
   const searchInput = useRef(null);
   const handleSearch = (confirm) => {
     confirm();
@@ -73,7 +49,7 @@ export default function TeacherStudent() {
   const handleReset = (clearFilters) => {
     clearFilters();
   };
-  const getColumnSearchProps = (dataIndex) => ({
+  const getColumnSearchProps = (title, dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
       selectedKeys,
@@ -87,7 +63,7 @@ export default function TeacherStudent() {
         onKeyDown={(e) => e.stopPropagation()}>
         <Input
           ref={searchInput}
-          placeholder={`Tìm kiếm ${dataIndex}`}
+          placeholder={`Tìm kiếm ${title}`}
           value={selectedKeys[0]}
           onChange={(e) => {
             setSelectedKeys(e.target.value ? [e.target.value] : []);
@@ -196,7 +172,6 @@ export default function TeacherStudent() {
     {
       title: "Số điện thoại",
       dataIndex: "phone",
-      ...getColumnSearchProps("phone"),
     },
     {
       title: "Ngày sinh",
@@ -206,60 +181,32 @@ export default function TeacherStudent() {
     {
       title: "Lớp",
       dataIndex: "klass",
-      ...getColumnSearchProps("klass"),
     },
   ];
-
-  const fileName = "Danh sách Học viên";
-  const title = `Danh sách Học viên ${klass ? `lớp ${klass}` : ""}`;
-
   return (
-    <main className="relative teacher-student container mx-auto p-0 my-0 flex flex-col min-h-[100vh] gap-y-2">
-      <h2 className="text-[28px] text-headingColor text-center font-sans font-extrabold tracking-wider">
-        Danh sách Học viên
-      </h2>
-      <FloatButton
-        icon={<SyncOutlined />}
-        style={{
-          top: 89,
-        }}
-        tooltip="Refresh"
-        type="primary"
-        onClick={handleGetAllStudent}
-      />
-      <Spin spinning={isLoading} className="z-30">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-x-2">
-            <div className="text-sm font-medium text-gray-900">Chọn lớp</div>
-            <Select
-              onChange={(value) => setKlass(value)}
-              placeholder="Chọn lớp"
-              style={{
-                width: 120,
-              }}>
-              {teacherClassList?.map((klass, index) => (
-                <Select.Option value={klass} key={index}>
-                  {klass}
-                </Select.Option>
-              ))}
-              <Select.Option value={""}>Tất cả</Select.Option>
-            </Select>
-          </div>
-          <ExcelExport
-            data={dataTable}
-            fileName={fileName}
-            title={title}
-            sheetName={klass}
-          />
+    <main className="relative user-class container mx-auto p-0 my-0 flex min-h-[100vh]">
+      <div className="pt-0 px-4 md:pt-2 lg:px-0 flex flex-col flex-1 w-full">
+        <div className="mb-12 lg:mb-14 flex flex-col w-full">
+          <h1 className="font-black text-[28px] text-[#242424]">Lớp của tôi</h1>
         </div>
-        <Table
-          className="mt-2"
-          dataSource={dataTable}
-          columns={columns}
-          pagination
-          bordered
-        />
-      </Spin>
+        <div className="relative -top-4 lg:mb-2 w-full -mt-10">
+          <div className="min-h-[180px] pb-4 pt-1 md:min-h-[200px] md:py-0 w-full flex md:justify-center md:items-center">
+            {student?.klass ? (
+              <Table
+                dataSource={dataTable}
+                columns={columns}
+                pagination
+                bordered
+                className="w-full"
+              />
+            ) : (
+              <span className="font-black text-[28px] text-[#242424]">
+                Bạn chưa tham gia lớp học nào
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

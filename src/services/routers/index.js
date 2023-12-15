@@ -86,5 +86,7 @@ export const getAllLessonURL = `${url}/lesson/getAll`;
 export const deleteLessonURL = `${url}/lesson/delete-lesson`;
 //Email
 export const sendTuitionURL = `${url}/email/send-tuition`;
+export const confirmTuitionURL = `${url}/email/confirm-tuition`;
 export const sendSalaryURL = `${url}/email/send-salary`;
+export const confirmSalaryURL = `${url}/email/confirm-salary`;
 export const confirmRegisterCourseURL = `${url}/email/confirm-course`;

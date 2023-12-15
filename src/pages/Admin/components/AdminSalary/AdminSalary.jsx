@@ -24,6 +24,7 @@ import {
 import * as SalaryService from "../../../../services/salary.api";
 import Toast from "../../../../utils/Toast";
 import { convertPrice } from "../../../../utils/function";
+import { ExcelExport } from "./ExcelExport";
 
 const { confirm } = Modal;
 
@@ -32,11 +33,12 @@ export default function AdminSalary() {
   const [isLoading, setIsLoading] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const salaryList = useSelector((state) => state.salary.salaryList);
-
+  const fileName = "Bảng lương";
+  const title = `Bảng lương`;
   const dataTable =
     salaryList?.length > 0 &&
-    salaryList?.map((salary) => {
-      return { ...salary, key: salary._id };
+    salaryList?.map((salary, index) => {
+      return { ...salary, key: index + 1 };
     });
 
   // *****API
@@ -321,6 +323,12 @@ export default function AdminSalary() {
             />
             <div className="min-h-[180px] pb-4 pt-1 md:min-h-[200px] md:py-0 w-full flex md:justify-center md:items-center">
               <Spin spinning={isLoading} className="z-30 w-full">
+                <ExcelExport
+                  data={dataTable}
+                  fileName={fileName}
+                  title={title}
+                />
+
                 <Table
                   dataSource={dataTable}
                   columns={columns}

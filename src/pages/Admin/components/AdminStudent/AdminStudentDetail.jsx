@@ -14,6 +14,7 @@ import {
 } from "../../../../redux/slice/student.slice";
 import { convertPrice } from "../../../../utils/function";
 import { Avatar } from "../../../../assets";
+import { confirmTuitionAPI } from "../../../../services/email.api";
 const { confirm } = Modal;
 
 export default function AdminStudentDetail({ onClose }) {
@@ -28,7 +29,6 @@ export default function AdminStudentDetail({ onClose }) {
   useEffect(() => {
     getStudent(studentId);
   }, [studentId, studentList]);
-
   const getStudent = async (id) => {
     const studentItem = await studentList?.find((item) => item._id === id);
     setStudent(studentItem);
@@ -55,6 +55,7 @@ export default function AdminStudentDetail({ onClose }) {
       },
       user.access_token
     );
+
     if (res.status === "OK") {
       Toast("success", res.message);
       dispatch(
@@ -70,6 +71,9 @@ export default function AdminStudentDetail({ onClose }) {
           },
         })
       );
+      if (data?.status) {
+        const rea = await confirmTuitionAPI({ email: student?.email });
+      }
       onCancel();
     } else {
       Toast("error", res.message);

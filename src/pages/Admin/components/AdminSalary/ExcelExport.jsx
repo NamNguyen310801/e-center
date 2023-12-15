@@ -1,9 +1,13 @@
 import { Button } from "antd";
-import dayjs from "dayjs";
 import * as XLSX from "xlsx";
 import * as XlsxPopulate from "xlsx-populate/browser/xlsx-populate";
 
-export const ExcelExport = ({ data, fileName, title, sheetName }) => {
+export const ExcelExport = ({
+  data,
+  fileName,
+  title,
+  sheetName = "bang-luong",
+}) => {
   const createDownLoadData = () => {
     handleExport().then((url) => {
       const downloadAnchorNode = document.createElement("a");
@@ -41,21 +45,17 @@ export const ExcelExport = ({ data, fileName, title, sheetName }) => {
     let table = [
       {
         A: "STT",
-        B: "Tên",
-        C: "Email",
-        D: "Điện thoại",
-        E: "Địa chỉ",
-        F: "Ngày sinh",
+        B: "Mức lương",
+        C: "Lương cơ bản",
+        D: "Thưởng",
       },
     ];
     data.forEach((row) => {
       table.push({
         A: row?.key,
         B: row?.name,
-        C: row?.email,
-        D: row?.phone,
-        E: row?.address,
-        F: row?.date ? dayjs(row?.date).format("DD/MM/YYYY") : "",
+        C: row?.basicSalary,
+        D: row?.bonusSalary,
       });
     });
     const finalData = [...titleEx, ...table];
@@ -75,11 +75,11 @@ export const ExcelExport = ({ data, fileName, title, sheetName }) => {
 
     const dataInfo = {
       titleCell: "A2",
-      titleRange: "A1:M2",
-      tbodyRange: `A3:F${finalData.length}`,
+      titleRange: "A1:D2",
+      tbodyRange: `A3:D${finalData.length}`,
       theadRange:
         headerIndexes?.length >= 1
-          ? `A${headerIndexes[0] + 1}:F${headerIndexes[0] + 1}`
+          ? `A${headerIndexes[0] + 1}:D${headerIndexes[0] + 1}`
           : null,
       theadRange1:
         headerIndexes?.length >= 2
@@ -91,7 +91,7 @@ export const ExcelExport = ({ data, fileName, title, sheetName }) => {
           : null,
       tLastColumnRange:
         headerIndexes?.length >= 1
-          ? `F${headerIndexes[0] + 1}:F${totalRecords + headerIndexes[0] + 1}`
+          ? `D${headerIndexes[0] + 1}:D${totalRecords + headerIndexes[0] + 1}`
           : null,
 
       tFirstColumnRange1:
@@ -114,12 +114,10 @@ export const ExcelExport = ({ data, fileName, title, sheetName }) => {
           fontFamily: "Arial",
           verticalAlignment: "center",
         });
-        sheet.row("3").height(20);
-        sheet.column("B").width(25);
-        sheet.column("C").width(25);
+
+        sheet.column("B").width(15);
+        sheet.column("C").width(15);
         sheet.column("D").width(15);
-        sheet.column("E").width(15);
-        sheet.column("F").width(15);
 
         sheet.range(dataInfo.titleRange).merged(true).style({
           bold: true,
@@ -160,7 +158,7 @@ export const ExcelExport = ({ data, fileName, title, sheetName }) => {
       onClick={() => {
         createDownLoadData();
       }}>
-      Xuất DS Học viên
+      Xuất DS lương
     </Button>
   );
 };

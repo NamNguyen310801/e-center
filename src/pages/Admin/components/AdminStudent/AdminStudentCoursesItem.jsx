@@ -1,7 +1,5 @@
-import { Progress } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 export default function AdminStudentCoursesItem({ item = "" }) {
   const courseList = useSelector((state) => state.course.courseList);
   const [data, setData] = useState("");

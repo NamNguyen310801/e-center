@@ -1,7 +1,9 @@
-import { Table } from "antd";
+import { FloatButton, Modal, Table } from "antd";
 import { useEffect, useState } from "react";
 import { convertPrice } from "../../../utils/function";
 import { useDispatch, useSelector } from "react-redux";
+import { QuestionCircleOutlined } from "@ant-design/icons";
+const { success } = Modal;
 
 export default function UserTuition() {
   const dispatch = useDispatch();
@@ -45,7 +47,7 @@ export default function UserTuition() {
       dataIndex: "key",
       render: (row, index) => (
         <div className="cursor-pointer w-full" key={index}>
-          <p>{row.slice(0, 2) + "..." + row.slice(-2)}</p>
+          <p>{row.slice(0, 3) + "..." + row.slice(-3)}</p>
         </div>
       ),
     },
@@ -69,6 +71,43 @@ export default function UserTuition() {
       render: (row) => <p>{row ? "Đã thanh toán" : "Chưa thanh toán"}</p>,
     },
   ];
+  const PayTuiTion = () => {
+    let secondsToGo = 10;
+    const instance = success({
+      title: "Thông báo",
+      content: (
+        <div className="text-justify">
+          <p>Để thanh toán học phí vui lòng chuyển khoản tới:</p>
+          <p>
+            {" "}
+            STK: <strong>0691000439747</strong>
+          </p>
+          <p>Ngân hàng: VietcomBank</p>
+          <p>Chi nhánh: Sóc Sơn - Hà Nội</p>
+          <p>
+            Chủ tài khoản : <strong>Nguyễn Đức Nam</strong>
+          </p>
+          <p>Nội dung: Email người dùng _ Id học phí</p>
+          <hr />
+          <p>Sau khi chuyển khoản vui lòng chờ phản hồi từ Trung tâm!</p>
+          <p>
+            Hoặc bạn có thể liên hệ đến số ZALO:<strong> 0999999999</strong> để
+            thanh toán học phí
+          </p>
+        </div>
+      ),
+      width: 450,
+    });
+
+    const timer = setInterval(() => {
+      secondsToGo -= 1;
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(timer);
+      instance.destroy();
+    }, secondsToGo * 1000);
+  };
   return (
     <main className="relative user-tuition container mx-auto p-0 my-0 flex min-h-[100vh]">
       <div className="pt-0 px-4 md:pt-2 lg:px-0 flex flex-col flex-1 w-full">
@@ -81,6 +120,16 @@ export default function UserTuition() {
               <h3 className="text-base m-0 font-semibold text-center">
                 Đã đóng: {convertPrice(totalAmountFeeTrue)}
               </h3>
+              <FloatButton
+                icon={<QuestionCircleOutlined />}
+                type="primary"
+                tooltip="Hướng dẫn thanh toán học phí"
+                onClick={PayTuiTion}
+                style={{
+                  right: 20,
+                  top: 80,
+                }}
+              />
               <Table
                 dataSource={dataStatusTrue}
                 columns={columns}

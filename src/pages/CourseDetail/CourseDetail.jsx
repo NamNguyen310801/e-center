@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBatteryFull, FaClock, FaFilm, FaPlayCircle } from "react-icons/fa";
 import { FaGaugeHigh } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +15,9 @@ import {
   addStudentCourseList,
   updateStudentCourseList,
 } from "../../redux/slice/student.slice";
-import { Rate } from "antd";
+import { Rate, Modal } from "antd";
+const { success } = Modal;
+
 function CourseDetail() {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -78,6 +80,43 @@ function CourseDetail() {
       );
     }
   };
+  const BuyCourse = () => {
+    let secondsToGo = 10;
+    const instance = success({
+      title: "Thông báo",
+      content: (
+        <div className="text-justify">
+          <p>Để đăng ký khóa học vui lòng chuyển khoản tới:</p>
+          <p>
+            {" "}
+            STK: <strong>0691000439747</strong>
+          </p>
+          <p>Ngân hàng: VietcomBank</p>
+          <p>Chi nhánh: Sóc Sơn - Hà Nội</p>
+          <p>
+            Chủ tài khoản : <strong>Nguyễn Đức Nam</strong>
+          </p>
+          <p>Nội dung: Tên khóa học_Email người dùng khóa học</p>
+          <hr />
+          <p>Sau khi chuyển khoản vui lòng chờ phản hồi từ Trung tâm!</p>
+          <p>
+            Hoặc bạn có thể liên hệ đến số ZALO:<strong> 0999999999</strong> để
+            đăng ký học
+          </p>
+        </div>
+      ),
+      width: 450,
+    });
+
+    const timer = setInterval(() => {
+      secondsToGo -= 1;
+    }, 1000);
+
+    setTimeout(() => {
+      clearInterval(timer);
+      instance.destroy();
+    }, secondsToGo * 1000);
+  };
   return (
     <main className="relative w-full">
       <section className="container mx-auto px-2 flex flex-col lg:flex-row">
@@ -95,7 +134,7 @@ function CourseDetail() {
                 {!Boolean(data?.rating) ? 3 : data?.rating}/5
               </p>
               <p className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                117 đánh giá
+                {Math.floor(Math.random() * (500 - 150 + 1)) + 150} đánh giá
               </p>
             </div>
           </h1>
@@ -116,7 +155,11 @@ function CourseDetail() {
                 <span className="ml-1">|</span>
               </li>
               <li className="inline-block mr-1">
-                Thời lượng<strong className="ml-1">3 giờ 29 phút </strong>
+                Thời lượng
+                <strong className="ml-1">
+                  {Math.floor(Math.random() * (10 - 0 + 1)) + 0} giờ{" "}
+                  {Math.floor(Math.random() * (60 - 0 + 1)) + 0} phút{" "}
+                </strong>
               </li>
             </ul>
             <div className="text-green-600 font-semibold ml-auto">
@@ -161,11 +204,19 @@ function CourseDetail() {
                 : " Miễn phí"}
             </h5>
             {!isCourse ? (
-              <button
-                className="bg-[#f05123] text-white min-w-[180px] px-4 py-2 text-base rounded-full font-semibold inline-block"
-                onClick={() => handleRegisterCourse([data?._id])}>
-                ĐĂNG KÝ HỌC
-              </button>
+              !data?.isPro ? (
+                <button
+                  className="bg-[#f05123] text-white min-w-[180px] px-4 py-2 text-base rounded-full font-semibold inline-block"
+                  onClick={() => handleRegisterCourse([data?._id])}>
+                  ĐĂNG KÝ HỌC
+                </button>
+              ) : (
+                <button
+                  className="bg-[#f05123] text-white min-w-[180px] px-4 py-2 text-base rounded-full font-semibold inline-block"
+                  onClick={BuyCourse}>
+                  MUA KHOÁ HỌC
+                </button>
+              )
             ) : isCourse?.isStarted ? (
               <Link
                 to={`/learning/${data?._id}`}
@@ -196,7 +247,11 @@ function CourseDetail() {
               <li className="text-[#494949] text-sm pl-9 relative mb-3">
                 <FaClock className="absolute left-0 top-1 overflow-visible" />
                 <span>
-                  Thời lượng <strong>3 giờ 29 phút</strong>
+                  Thời lượng{" "}
+                  <strong>
+                    {Math.floor(Math.random() * (10 - 0 + 1)) + 0} giờ
+                    {Math.floor(Math.random() * (60 - 0 + 1)) + 0} phút
+                  </strong>
                 </span>
               </li>
               <li className="text-[#494949] text-sm pl-9 relative mb-3">

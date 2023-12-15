@@ -1,19 +1,43 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Button, Input, Space, Table } from "antd";
+import dayjs from "dayjs";
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
 
 export default function Schedule() {
   const scheduleList = useSelector((state) => state.schedule.scheduleList);
-  const dataTable =
-    scheduleList?.length > 0 &&
-    scheduleList?.map((schedule) => {
+  const classList = useSelector((state) => state.classSlice.classList);
+  const groupedByName = {};
+  scheduleList
+    ?.map((schedule, index) => {
+      let item = classList?.find(
+        (klass) => klass?.name === schedule?.nameClass
+      );
       return {
-        ...schedule,
-        key: schedule._id,
+        key: index + 1,
+        nameClass: schedule?.nameClass,
+        dayOfWeek: schedule?.dayOfWeek,
+        dayStart: item?.dayStart || "",
+        dayEnd: item?.dayEnd || "",
+        teacher: schedule.teacher,
       };
+    })
+    .forEach((item) => {
+      const nameClass = item.nameClass;
+      if (!groupedByName[nameClass]) {
+        groupedByName[nameClass] = {
+          nameClass: nameClass,
+          dayOfWeek: [item.dayOfWeek],
+          dayStart: item?.dayStart || "",
+          dayEnd: item?.dayEnd || "",
+          teacher: [item.teacher],
+        };
+      } else {
+        // Nếu đã tồn tại, thêm giá trị dayOfWeek vào mảng
+        groupedByName[nameClass].dayOfWeek.push(item.dayOfWeek);
+      }
     });
-
+  const dataTable = scheduleList?.length > 0 && Object.values(groupedByName);
   //=========== Column table
   //func search
   const searchInput = useRef(null);
@@ -101,21 +125,40 @@ export default function Schedule() {
       ...getColumnSearchProps("nameClass"),
     },
     {
+      title: "Ngày bắt đầu",
+      dataIndex: "dayStart",
+      render: (row) => (row ? dayjs(row).format("DD/MM/YYYY") : ""),
+    },
+    {
+      title: "Ngày kết thúc",
+      dataIndex: "dayEnd",
+      render: (row) => (row ? dayjs(row).format("DD/MM/YYYY") : ""),
+    },
+    {
       title: "Lịch học",
       dataIndex: "dayOfWeek",
-      render: (row) => <p className="capitalize">{row} </p>,
-    },
-    {
-      title: "Ca học",
-      dataIndex: "caHoc",
-    },
-    {
-      title: "Giờ học",
-      dataIndex: "time",
+      render: (row, index) => (
+        <div
+          key={index}
+          className="flex justify-center items-center gap-x-2 w-full capitalize">
+          {row?.map((day, index) => (
+            <p key={index}>{day},</p>
+          ))}
+        </div>
+      ),
     },
     {
       title: "Giảng viên",
       dataIndex: "teacher",
+      render: (row, index) => (
+        <div
+          key={index}
+          className="flex justify-center items-center gap-x-2 w-full capitalize">
+          {row?.map((teacher, index) => (
+            <p key={index}> {row?.length > 1 ? teacher + " ," : teacher}</p>
+          ))}
+        </div>
+      ),
     },
   ];
   return (

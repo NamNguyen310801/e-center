@@ -25,6 +25,7 @@ import {
 } from "../../../../redux/slice/tuition.slice";
 import Toast from "../../../../utils/Toast";
 import { convertPrice } from "../../../../utils/function";
+import { ExcelExport } from "./ExcelExport";
 
 const { confirm } = Modal;
 export default function AdminTuition() {
@@ -35,8 +36,8 @@ export default function AdminTuition() {
 
   const dataTable =
     tuitionList?.length > 0 &&
-    tuitionList?.map((tuition) => {
-      return { ...tuition, key: tuition._id };
+    tuitionList?.map((tuition, index) => {
+      return { ...tuition, key: index + 1 };
     });
 
   // *****API
@@ -167,7 +168,7 @@ export default function AdminTuition() {
       render: (row) => <p className="capitalize">{row}</p>,
     },
     {
-      title: "Số tiền",
+      title: "Số tiền/buổi",
       dataIndex: "fee",
       render: (row) => (
         <p className="max-w-[200px]">{row ? convertPrice(row) : 0} </p>
@@ -285,6 +286,7 @@ export default function AdminTuition() {
             />
             <div className="min-h-[180px] pb-4 pt-1 md:min-h-[200px] md:py-0 w-full flex md:justify-center md:items-center">
               <Spin spinning={isLoading} className="z-30 w-full">
+                <ExcelExport data={dataTable} />
                 <Table
                   dataSource={dataTable}
                   columns={columns}

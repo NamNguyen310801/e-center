@@ -11,6 +11,7 @@ import {
   UserFooter,
   UserSchedule,
   UserTuition,
+  UserClass,
 } from "./components";
 import "./user.css";
 export default function User() {
@@ -26,6 +27,8 @@ export default function User() {
             <Route path={ROUTER.SETTINGS} element={<UserSetting />} />
             <Route path={ROUTER.SCHEDULE} element={<UserSchedule />} />
             <Route path={ROUTER.TUITION} element={<UserTuition />} />
+            <Route path={ROUTER.MYCLASS} element={<UserClass />} />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

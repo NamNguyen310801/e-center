@@ -29,7 +29,7 @@ const ROUTER = {
   ADSALARY: "/admin-salary",
   ADTUITION: "/admin-tuition",
   ADDIFF: "/admin-different",
-  ADDSTATS:"/admin-statsTuitionAndSalary",
+  ADDSTATS: "/admin-statsTuitionAndSalary",
   //Nav-Home
   LOTRINH: "/lo-trinh-hoc",
   KHOAHOC: "/khoa-hoc",
@@ -40,6 +40,7 @@ const ROUTER = {
   //User
   CTKHOAHOC: "/khoa-hoc/:id",
   MYCOURSES: "/my-courses",
+  MYCLASS: "/my-class",
   MYPROFILE: "/profile",
   SETTINGS: "/settings/*",
   SCHEDULE: "/schedule/*",

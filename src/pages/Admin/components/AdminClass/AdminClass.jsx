@@ -15,6 +15,7 @@ import {
   Spin,
   Space,
   Button,
+  DatePicker,
 } from "antd";
 import { useEffect, useRef, useState } from "react";
 import { ButtonDelete, ButtonEdit } from "../../../../components";
@@ -29,6 +30,7 @@ import {
 import Toast from "../../../../utils/Toast";
 import { updateStudentList } from "../../../../redux/slice/student.slice";
 import { Avatar } from "../../../../assets";
+import dayjs from "dayjs";
 const { confirm } = Modal;
 
 export default function AdminClass() {
@@ -78,7 +80,12 @@ export default function AdminClass() {
   //-----Create
   const createClass = async () => {
     try {
-      const res = await ClassService.createClassAPI(formValue);
+      const res = await ClassService.createClassAPI({
+        ...formValue,
+        dayStart:
+          formValue?.dayStart !== "" ? formValue?.dayStart?.format() : "",
+        dayEnd: formValue?.dayEnd !== "" ? formValue?.dayEnd?.format() : "",
+      });
       if (res && res.status === "ERROR") {
         Toast("error", res.message);
       } else if (res.data) {
@@ -93,9 +100,24 @@ export default function AdminClass() {
   };
   //-----Edit
   const editClass = async (id, data) => {
-    const res = await ClassService.updateClassAPI(id, data, user.access_token);
+    const res = await ClassService.updateClassAPI(
+      id,
+      {
+        ...data,
+        dayStart: data?.dayStart !== "" ? data?.dayStart?.format() : "",
+        dayEnd: data?.dayEnd !== "" ? data?.dayEnd?.format() : "",
+      },
+      user.access_token
+    );
     if (res.status === "OK") {
-      dispatch(updateClassList({ _id: id, ...data }));
+      dispatch(
+        updateClassList({
+          _id: id,
+          ...data,
+          dayStart: data?.dayStart !== "" ? data?.dayStart?.format() : "",
+          dayEnd: data?.dayEnd !== "" ? data?.dayEnd?.format() : "",
+        })
+      );
       Toast("success", res.message);
       setTimeout(() => {
         onCancel();
@@ -173,6 +195,8 @@ export default function AdminClass() {
     form.setFieldsValue({
       name: formValue?.name,
       course: formValue?.course,
+      dayStart: formValue?.dayStart,
+      dayEnd: formValue?.dayEnd,
     });
   }, [formValue, form]);
   useEffect(() => {
@@ -200,7 +224,11 @@ export default function AdminClass() {
     setIsOpen1(false);
     setIsOpen2(false);
     setIdEdit(value._id);
-    setFormValue(value);
+    setFormValue({
+      ...value,
+      dayStart: value?.dayStart ? dayjs(value?.dayStart) : "",
+      dayEnd: value?.dayEnd ? dayjs(value?.dayEnd) : "",
+    });
     setTimeout(() => {
       setIsOpenEdit(true);
     }, 100);
@@ -333,6 +361,16 @@ export default function AdminClass() {
       sorter: (a, b) => a?.countStudent - b?.countStudent,
     },
     {
+      title: "Ngày bắt đầu",
+      dataIndex: "dayStart",
+      render: (row) => (row ? dayjs(row).format("DD/MM/YYYY") : ""),
+    },
+    {
+      title: "Ngày kết thúc",
+      dataIndex: "dayEnd",
+      render: (row) => (row ? dayjs(row).format("DD/MM/YYYY") : ""),
+    },
+    {
       title: "Lịch học",
       dataIndex: "schedule",
       render: (row, index) => (
@@ -363,7 +401,7 @@ export default function AdminClass() {
       render: (row, index) => (
         <div
           key={index}
-          className="flex items-center justify-between max-w-[150px]">
+          className="flex items-center justify-between max-w-[150px] gap-x-2">
           <ButtonEdit onClick={() => openEdit(row)} />
           <ButtonDelete onClick={() => showDeleteConfirm(row._id)} />
         </div>
@@ -433,6 +471,34 @@ export default function AdminClass() {
                             </Select.Option>
                           ))}
                         </Select>
+                      </Form.Item>
+                      <Form.Item
+                        label="Ngày bắt đầu"
+                        name="dayStart"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Vui lòng nhập thông tin!",
+                          },
+                        ]}>
+                        <DatePicker
+                          format={"DD/MM/YYYY"}
+                          placeholder="Nhập ngày bắt đầu"
+                        />
+                      </Form.Item>
+                      <Form.Item
+                        label="Ngày kết thúc"
+                        name="dayEnd"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Vui lòng nhập thông tin!",
+                          },
+                        ]}>
+                        <DatePicker
+                          format={"DD/MM/YYYY"}
+                          placeholder="Nhập ngày kết thúc (dự kiến)"
+                        />
                       </Form.Item>
                     </Form>
                   </div>
@@ -650,6 +716,34 @@ export default function AdminClass() {
                   </Select.Option>
                 ))}
               </Select>
+            </Form.Item>
+            <Form.Item
+              label="Ngày bắt đầu"
+              name="dayStart"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng nhập thông tin!",
+                },
+              ]}>
+              <DatePicker
+                format={"DD/MM/YYYY"}
+                placeholder="Nhập ngày bắt đầu"
+              />
+            </Form.Item>
+            <Form.Item
+              label="Ngày kết thúc"
+              name="dayEnd"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng nhập thông tin!",
+                },
+              ]}>
+              <DatePicker
+                format={"DD/MM/YYYY"}
+                placeholder="Nhập ngày kết thúc (dự kiến)"
+              />
             </Form.Item>
           </Form>
         </Modal>

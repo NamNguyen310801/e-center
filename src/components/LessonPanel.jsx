@@ -4,7 +4,8 @@ import LessonItem from "./LessonItem";
 
 export default function LessonPanel({ item = {} }) {
   const [show, setShow] = useState(false);
-
+  const min = Math.floor(Math.random() * (9 - 1 + 1)) + 1;
+  const second = Math.floor(Math.random() * (60 - 0 + 1)) + 0;
   return (
     <>
       <div
@@ -14,7 +15,8 @@ export default function LessonPanel({ item = {} }) {
           {item?.position + ". " + item?.title}
         </h3>
         <span className="text-[#29303b] font-normal text-[12px] mt-1">
-          0/{item?.trackSteps?.length} | 22:09
+          0/{item?.trackSteps?.length} | {min > 9 ? min : `0${min}`}:
+          {second > 9 ? second : `0${second}`}
         </span>
         <span className="absolute right-[23px] top-3 text-base text-[#333]">
           {show ? <FaChevronUp /> : <FaChevronDown />}

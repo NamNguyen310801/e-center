@@ -6,3 +6,4 @@ export { default as UserSetting } from "./UserSetting";
 export { default as UserFooter } from "./UserFooter";
 export { default as UserSchedule } from "./UserSchedule";
 export { default as UserTuition } from "./UserTuition";
+export { default as UserClass } from "./UserClass";

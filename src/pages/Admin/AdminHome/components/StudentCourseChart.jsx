@@ -11,7 +11,7 @@ export default function StudentCourseChart() {
   return (
     <div className="w-[32rem] h-[22rem] bg-white p-4 rounded-sm border border-gray-200 ">
       <strong className="text-gray-700 font-medium">
-        Danh sách học viên theo lớp
+        Danh sách học viên theo khóa học
       </strong>
       <div className="border-x border-gray-200 rounded-sm mt-3 w-[26rem]">
         <div className="flex w-full gap-4">
