@@ -78,7 +78,11 @@ export const convertISOToNewFormat = (isoTime) => {
 
   return `${hours}:${minutes}:${seconds} ${day}/${month}/${year}`;
 };
-
+export const getCurrentYear = () => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  return currentYear;
+};
 //
 export const dateFormatList = [
   "DD/MM/YYYY",
@@ -230,6 +234,60 @@ export const calculateYearlyTuitionSummary = (students) => {
 
   return resultArray;
 };
+
+export const calculateMonthYearlyTuition = (students) => {
+  const yearlyTuition = {};
+
+  // Lặp qua danh sách học viên
+  students.forEach((student) => {
+    // Lặp qua mảng tuitionList của mỗi học viên
+    student?.tuitionList?.forEach((tuitionItem) => {
+      // Lấy năm và tháng từ createdAt
+      const year = new Date(tuitionItem?.createdAt).getFullYear();
+      const month = new Date(tuitionItem?.createdAt).getMonth() + 1;
+
+      // Tạo khóa năm nếu chưa tồn tại
+      if (!yearlyTuition[year]) {
+        yearlyTuition[year] = {};
+      }
+
+      // Tạo khóa tháng và gán giá trị là 0 nếu chưa tồn tại
+      yearlyTuition[year][month] = yearlyTuition[year][month] || {
+        total: 0,
+        unPaid: 0,
+        paid: 0,
+      };
+
+      // Thêm học phí vào tổng học phí theo tháng
+      yearlyTuition[year][month].total += tuitionItem?.amountFee;
+
+      // Xác định trạng thái thanh toán và tăng giá trị tương ứng
+      if (tuitionItem.status === false) {
+        yearlyTuition[year][month].unPaid += tuitionItem?.amountFee;
+      } else {
+        yearlyTuition[year][month].paid += tuitionItem?.amountFee;
+      }
+    });
+  });
+
+  // Chuyển đổi dữ liệu thành mảng đối tượng mong muốn
+  const resultArray = [];
+
+  // Lặp qua tất cả các năm và tháng
+  for (let year in yearlyTuition) {
+    for (let month = 1; month <= 12; month++) {
+      resultArray.push({
+        month: month,
+        year: parseInt(year),
+        total: yearlyTuition[year][month]?.total || 0,
+        unPaid: yearlyTuition[year][month]?.unPaid || 0,
+        paid: yearlyTuition[year][month]?.paid || 0,
+      });
+    }
+  }
+
+  return resultArray;
+};
 export const calculateTuitionByClass = (students) => {
   const tuitionByClassSummary = {};
   students.forEach((student) => {
@@ -362,6 +420,59 @@ export const calculateQuarterlySalarySummary = (teachers) => {
     quarter: `${quarter}/${new Date().getFullYear()}`,
     ...quarterlySalarySummary[quarter],
   }));
+  return resultArray;
+};
+export const calculateMonthYearlySalary = (teachers) => {
+  const yearlySalary = {};
+
+  // Lặp qua danh sách học viên
+  teachers.forEach((teacher) => {
+    // Lặp qua mảng tuitionList của mỗi học viên
+    teacher?.salaryList?.forEach((salary) => {
+      // Lấy năm và tháng từ createdAt
+      const year = new Date(salary?.createdAt).getFullYear();
+      const month = new Date(salary?.createdAt).getMonth() + 1;
+
+      // Tạo khóa năm nếu chưa tồn tại
+      if (!yearlySalary[year]) {
+        yearlySalary[year] = {};
+      }
+
+      // Tạo khóa tháng và gán giá trị là 0 nếu chưa tồn tại
+      yearlySalary[year][month] = yearlySalary[year][month] || {
+        total: 0,
+        unPaid: 0,
+        paid: 0,
+      };
+
+      // Thêm học phí vào tổng học phí theo tháng
+      yearlySalary[year][month].total += salary?.amountSalary;
+
+      // Xác định trạng thái thanh toán và tăng giá trị tương ứng
+      if (salary.status === false) {
+        yearlySalary[year][month].unPaid += salary?.amountSalary;
+      } else {
+        yearlySalary[year][month].paid += salary?.amountSalary;
+      }
+    });
+  });
+
+  // Chuyển đổi dữ liệu thành mảng đối tượng mong muốn
+  const resultArray = [];
+
+  // Lặp qua tất cả các năm và tháng
+  for (let year in yearlySalary) {
+    for (let month = 1; month <= 12; month++) {
+      resultArray.push({
+        month: month,
+        year: parseInt(year),
+        total: yearlySalary[year][month]?.total || 0,
+        unPaid: yearlySalary[year][month]?.unPaid || 0,
+        paid: yearlySalary[year][month]?.paid || 0,
+      });
+    }
+  }
+
   return resultArray;
 };
 export const countStudentsByClass = (students) => {

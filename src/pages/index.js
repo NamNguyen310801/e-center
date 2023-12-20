@@ -8,7 +8,6 @@ export { default as Main } from "./Main/Main";
 export { default as Login } from "./Login/Login";
 export { default as Teacher } from "./Teacher/Teacher";
 export { default as User } from "./User/User";
-export { default as Hero } from "./Hero/Hero";
 export { default as SignUp } from "./SignUp/SignUp";
 export { default as StudentFeel } from "./StudentFeel/StudentFeel";
 export { default as Course } from "./Course/Course";

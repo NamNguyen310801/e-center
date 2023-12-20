@@ -13,3 +13,6 @@ export { default as CrownIcon } from "./images/crown_icon.svg";
 export { default as BgProfile } from "./images/bg-profile.jpg";
 export { default as Avatar } from "./images/avatar.jpg";
 export { default as Fail } from "./images/fail.png";
+export { default as Banner3 } from "./images/banner3.jpg";
+export { default as Banner4 } from "./images/banner4.jpg";
+export { default as Banner5 } from "./images/banner5.png";
